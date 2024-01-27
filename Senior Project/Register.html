@@ -8,49 +8,178 @@
     <title>Register</title>
     <link rel="stylesheet" href="styles/register.css">
     <link href="https://unpkg.com/boxicons@2.1.3/css/boxicons.min.css" rel="stylesheet">
+    <script src="scripts/register.js"></script>
 </head>
 
-<body>
+<body onload="init()">
 
     <div class="wrapper">
         <form action="">
             <h1>Register</h1>
 
-            <div class="input-box">
-                <input type="text" placeholder="First Name" required>
+            <div class="input-box" id="fname">
+                <input type="text" placeholder="First Name" id ="FName" required>
+                <i class="bx bxs-user" id="fnameuser"></i>
+            </div>
+
+            <div class="input-box" id="lname">
+                <input type="text" placeholder="Last Name" id ="LName" required>
+                <i class="bx bxs-user" id="fnameuser"></i>
+            </div>
+            
+            <div class="input-box" id="email">
+                <input type="text" placeholder="Email" id ="Email" pattern="[a-z0-9._%+\-]+@[a-z0-9.\-]+\.[a-z]{2,}$" required>
                 <i class="bx bxs-user"></i>
             </div>
 
-            <div class="input-box">
-                <input type="text" placeholder="Last Name" required>
+            <div class="input-box" id="username">
+                <input type="text" placeholder="Username" id ="Username" required>
                 <i class="bx bxs-user"></i>
             </div>
             
-            <div class="input-box">
-                <input type="text" placeholder="Email" required>
-                <i class="bx bxs-user"></i>
-            </div>
-
-            <div class="input-box">
-                <input type="text" placeholder="Username" required>
-                <i class="bx bxs-user"></i>
-            </div>
-            
-            <div class="input-box">
-                <input type="password" placeholder="Password" required>
+            <div class="input-box" id="securepass">
+                <input type="password" placeholder="Password" id ="PassWord" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" 
+                required title="Must contain at least one  number and one uppercase and lowercase letter, and at least 8 or more characters" >
                 <i class="bx bxs-lock-alt"></i>
             </div>
 
-            <div class="input-box">
-                <input type="password" placeholder="Confirm Password" required>
+            <div class="input-box" id="securepass">
+                <input type="password" placeholder="Confirm Password" id ="CPassWord" required>
                 <i class="bx bxs-lock-alt"></i>
             </div>
+
+            <!-- <div class="select-menu">
+                <div class="select-btn">
+                    <span class="sBtn-text">Pick a question</span>
+                    <i class="bx bx-chevron-down"></i>
+                </div>
+
+                <ul class="options">
+                    <li class="option">
+                        <span class="option-text">What is your mother's maiden name?</span>
+                    </li>
+                </ul>
+
+                <ul class="options">
+                    <li class="option">
+                        <span class="option-text">What is the name of your first pet?</span>
+                    </li>
+                </ul>
+
+                <ul class="options">
+                    <li class="option">
+                        <span class="option-text">What was your first car?</span>
+                    </li>
+                </ul>
+
+                <ul class="options">
+                    <li class="option">
+                        <span class="option-text">What elementary school did you attend?</span>
+                    </li>
+                </ul>
+
+                <ul class="options">
+                    <li class="option">
+                        <span class="option-text">What town were you born in?</span>
+                    </li>
+                </ul>
+
+                <ul class="options">
+                    <li class="option">
+                        <span class="option-text">What is your first friends First name?</span>
+                    </li>
+                </ul>
+
+                <ul class="options">
+                    <li class="option">
+                        <span class="option-text">Who was your childhood hero?</span>
+                    </li>
+                </ul>
+
+                <ul class="options">
+                    <li class="option">
+                        <span class="option-text">Who was your childhood crush?</span>
+                    </li>
+                </ul>
+
+                <ul class="options">
+                    <li class="option">
+                        <span class="option-text">Where was your best family vacation as a kid?</span>
+                    </li>
+                </ul>
+
+                <ul class="options">
+                    <li class="option">
+                        <span class="option-text">What is your favorite holiday?</span>
+                    </li>
+                </ul>
+
+                <ul class="options">
+                    <li class="option">
+                        <span class="option-text">What is your favorite mythical creature?</span>
+                    </li>
+                </ul>
+
+                <ul class="options">
+                    <li class="option">
+                        <span class="option-text">What is your favorite animal?</span>
+                    </li>
+                </ul>
+
+                <ul class="options">
+                    <li class="option">
+                        <span class="option-text">What is your favorite game?</span>
+                    </li>
+                </ul>
+
+                <ul class="options">
+                    <li class="option">
+                        <span class="option-text">What is your girlfriends/boyfriends last name?</span>
+                    </li>
+                </ul>
+
+                <ul class="options">
+                    <li class="option">
+                        <span class="option-text">What is your dream vehicle?</span>
+                    </li>
+                </ul>
+
+                <ul class="options">
+                    <li class="option">
+                        <span class="option-text">What is your dream job?</span>
+                    </li>
+                </ul>
+
+                <ul class="options">
+                    <li class="option">
+                        <span class="option-text">What is a goal you wish to achieve?</span>
+                    </li>
+                </ul>
+
+                <ul class="options">
+                    <li class="option">
+                        <span class="option-text">What would you want to be known for doing?</span>
+                    </li>
+                </ul>
+
+                <ul class="options">
+                    <li class="option">
+                        <span class="option-text">What is your mother-in-law's maiden name?</span>
+                    </li>
+                </ul>
+
+                <ul class="options">
+                    <li class="option">
+                        <span class="option-text">What is your favorite season?</span>
+                    </li>
+                </ul>
+            </div> -->
 
             <!-- <button class="btn" id="populate">populate</button> -->
 
-            <div class="Security">
-                <label for="cars">Select Security Question 1:</label>
-                <select name="Securityquestions" id="Security1" onchange="disableOption(this.value)">
+            <div class="Security" id="secfeild">
+                <label>Select Security Question 1:</label>
+                <select name="Securityquestions" id="Security1" onchange="MakeChange(this.value)">
                     <option value="0" hidden>Pick a question</option>
                     <option value="1">What is your mother's maiden name?</option>
                     <option value="2">What is the name of your first pet?</option>
@@ -75,13 +204,13 @@
                 </select>
             </div>
 
-            <div class="input-box">
-                <input type="text" placeholder="Security Question answer 1" required>
+            <div class="input-box" id="secfanswer">
+                <input type="text" placeholder="Security Question answer 1" id="SecAns1" required>
                 <i class="bx bxs-lock-alt"></i>
             </div>
 
-            <div class="Security">
-                <label for="cars">Select Security Question 2:</label>
+            <div class="Security" id="secfeild">
+                <label>Select Security Question 2:</label>
                 <select name="Securityquestions" id="Security2" onchange="disableOption(this.value)">
                     <option value="0" hidden>Pick a question</option>
                     <option value="1">What is your mother's maiden name?</option>
@@ -107,25 +236,25 @@
                 </select>
             </div>
 
-            <div class="input-box">
-                <input type="text" placeholder="Security Question answer 2" required>
+            <div class="input-box" id="secfanswer">
+                <input type="text" placeholder="Security Question answer 2" id="SecAns2" required>
                 <i class="bx bxs-lock-alt"></i>
             </div>
             
-            <button type="submit" class="btn">Register</button>
+            <button class="btn" id ="register-btn" onclick="check()">Register</button>
+            <script src="scripts/register.js"></script>
 
-
-            <div class="register-link">
+            <div class="register-link" id="login-link">
                 <p>Already have an account? <a href="Login.html">Login</a></p>
             </div>
         </form>
-<!-- 
-        <button class="btn" id="Test" onclick="Tester()">test</button> -->
 
     </div>
 
+    <!-- <button class="btn" id="Test" onclick="Test()">test</button> -->
+
     <!-- <script>
-        Tester(){
+        function Tester(){
             alert("THIS iS A TEST!!!");
         }
     </script> -->
@@ -160,9 +289,9 @@
         }
         </script> -->
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="scripts/select.js"></script>
-    <script src="scripts/register.js"></script>
+    <!-- <script type="text/javascript" src="scripts/register.js"></script> -->
 
     </body>
 

@@ -132,10 +132,10 @@ body{
 
 .Securityquestions {
     background-color: black;
+    border-radius: 40px; 
 }
 
 .select-items {
-  position: absolute;
   background-color: transparent;
   color: black;
   top: 100%;
@@ -147,6 +147,8 @@ body{
 select {
     border: 1px solid #fff;
     background-color: transparent;
+    border-radius: 140px;
+    text-align: center;
 }
 
 select option{
@@ -154,3 +156,112 @@ select option{
     color: black;
 }
 
+#fname{
+    width: 28%;
+    height: 50%;
+}
+
+#lname{
+    width: 28%;
+    height: 50%;
+    top: -100px;
+    left: 220px;
+    padding: 0px 0px 0px 0px;
+}
+
+#fnameuser{
+    top: 25px;
+}
+
+#email{
+    top: -114px;
+}
+
+#username{
+    top: -114px;
+}
+
+#securepass{
+    top: -114px;
+}
+
+#secfeild{
+    position: relative;
+    top: -114px;
+}
+
+#secfanswer{
+    top: -114px;
+}
+
+#register-btn{
+    position: relative;
+    top: -95px;
+}
+
+#login-link{
+    position: relative;
+    top: -80px;
+}
+
+/* .select-menu{
+    width: 380px;
+    margin: 150px auto;
+}
+
+.select-menu .select-btn{
+    display: flex;
+    height: 55px;
+    background: transparent;
+    padding: 20px;
+    font-size: 18px;
+    font-weight: 400;
+    border-radius: 8px;
+    align-items: center;
+    cursor: pointer;
+    color: white;
+    justify-content: space-between;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+.select-btn i{
+    font-size: 25px;
+}
+
+.select-menu.active .select-btn i{
+    transform: rotate(-180deg);
+}
+
+.select-menu .options{
+    position: relative;
+    padding: 20px;
+    margin-top: 10px;
+    border-radius: 8px;
+    background: transparent;
+    color: white;
+    box-shadow: 0 0 3 rgba(0,0,0,0.1);
+}
+
+.options .option{
+    display: flex;
+    height: 55px;
+    cursor: pointer;
+    padding: 0 16px;
+    border-radius: 8px;
+    align-items: center;
+    background: transparent;
+}
+
+.options .option:hover{
+    background: #F2F2F2;
+    color: black;
+}
+
+.option .option.text{
+    font-size: 18px;
+    color: white;
+}
+
+.select-menu.active .options{
+    display: block;
+} */

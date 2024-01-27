@@ -57,7 +57,7 @@ body{
     color:#fff;
 }
 
- .input-box i {
+.input-box i {
    position: absolute;
    right: -50px;
    top: 50%;
@@ -115,4 +115,8 @@ body{
 
 .register-link p a:hover {
     text-decoration: underline;
-} 
+}
+
+#search{
+    cursor: pointer;
+}
