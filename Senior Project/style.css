@@ -90,6 +90,9 @@
 	margin: auto;
 	margin-top: 10px;
     background: #cca333;
+	text-align: center;
+	font-size: 48px;
+	font-family: 'Times New Roman', Times, serif; 
     }
 #upcoming-assigments{
     width: 1915px;
