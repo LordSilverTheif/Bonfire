@@ -5,6 +5,13 @@
 	margin-right:auto; 
 	background-image: linear-gradient(red, purple);
 }
+#wrapper2{
+	width:1915px;
+	height:3800px;
+	margin-left:auto;
+	margin-right:auto; 
+	background-image: linear-gradient(red, purple);
+}
 #header{
 	width:2000px;
 	margin-left:auto;
@@ -59,6 +66,104 @@
 	margin-top: 17.5px;
 	margin-right: 15px;
 }
+#class7{
+	width: 615px;
+	height: 400px;
+	float: left;
+	background: #C47735;
+	margin-left: 15px;
+	margin-top: 17.5px;
+}
+#class8{
+	width: 620px;
+	height: 400px;
+	float: left;
+	background: yellow;
+	margin-left: 15px;
+	margin-top: 17.5px;
+	}
+#class9{
+	width: 615px;
+	height: 400px;
+	background: white;
+	float: right;
+	margin-right: 15px;
+	margin-top: 17.5px;
+	}
+
+#class10{
+	width: 615px;
+	height: 400px;
+	float: left;
+	background: orange;
+	margin-top: 15px;
+	margin-left: 15px;
+}
+#class11{
+	width: 620px;
+	height: 400px;
+	float: left;
+	background: blue;
+	margin-top: 17.5px;
+	margin-left: 17.5px;
+}
+#class12{
+	width: 615px;
+	height: 400px;
+	float: right;
+	background: green;
+	margin-top: 17.5px;
+	margin-right: 15px;
+}
+#class13{
+	width: 615px;
+	height: 400px;
+	float: left;
+	background: #C47735;
+	margin-left: 15px;
+	margin-top: 17.5px;
+}
+#class14{
+	width: 620px;
+	height: 400px;
+	float: left;
+	background: yellow;
+	margin-left: 15px;
+	margin-top: 17.5px;
+	}
+#class15{
+	width: 615px;
+	height: 400px;
+	background: white;
+	float: right;
+	margin-right: 15px;
+	margin-top: 17.5px;
+	}
+
+#class16{
+	width: 615px;
+	height: 400px;
+	float: left;
+	background: orange;
+	margin-top: 15px;
+	margin-left: 15px;
+}
+#class17{
+	width: 620px;
+	height: 400px;
+	float: left;
+	background: blue;
+	margin-top: 17.5px;
+	margin-left: 17.5px;
+}
+#class18{
+	width: 615px;
+	height: 400px;
+	float: right;
+	background: green;
+	margin-top: 17.5px;
+	margin-right: 15px;
+}
 #professors{
 	width: 1915px;
 	height: 500px;
@@ -100,7 +205,16 @@
     margin-top: 10px;
 	float: left;
     background: red;
+	margin-bottom: 10px;
     }
+#recent-submissions{
+	width: 1915px;
+	height: 200px;
+	margin-top: 10px;
+	float: left;
+	background: red;
+	margin-bottom:10px;
+	}
 footer{
 	text-align: center;
 }
