@@ -72,7 +72,7 @@ window.onload = function(){
 // })
 
 let btnTest = document.querySelector("#Test");
-let question1 = document.querySelector("#Security!");
+let question1 = document.querySelector("#Security1");
 let question2 = document.querySelector("#Security2");
 
 btnTest.addEventListener("click", () =>{
