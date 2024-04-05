@@ -1,6 +1,6 @@
 -- MySQL dump 10.13  Distrib 8.0.36, for Linux (x86_64)
 --
--- Host: 127.0.0.1    Database: bonfire
+-- Host: localhost    Database: bonfire
 -- ------------------------------------------------------
 -- Server version	8.0.36-0ubuntu0.22.04.1
 
@@ -16,12 +16,18 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `assignments`
+-- Current Database: `bonfire`
 --
 
-DROP DATABASE IF EXISTS bonfire;
-CREATE DATABASE bonfire;
-USE bonfire;
+/*!40000 DROP DATABASE IF EXISTS `bonfire`*/;
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/ `bonfire` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+
+USE `bonfire`;
+
+--
+-- Table structure for table `assignments`
+--
 
 DROP TABLE IF EXISTS `assignments`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -37,15 +43,6 @@ CREATE TABLE `assignments` (
   CONSTRAINT `class_id` FOREIGN KEY (`class_id`) REFERENCES `classes` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `assignments`
---
-
-LOCK TABLES `assignments` WRITE;
-/*!40000 ALTER TABLE `assignments` DISABLE KEYS */;
-/*!40000 ALTER TABLE `assignments` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `classes`
@@ -68,16 +65,6 @@ CREATE TABLE `classes` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `classes`
---
-
-LOCK TABLES `classes` WRITE;
-/*!40000 ALTER TABLE `classes` DISABLE KEYS */;
-INSERT INTO `classes` VALUES (1,'CSCI 185',1,'2024-03-11','2024-03-31','Spring 2024'),(2,'CSCI 330 ',1,'2024-01-22','2024-03-31','Spring 2024'),(3,'CSCI 345',1,'2024-03-12','2024-03-31','Spring 2024'),(4,'CSCI 345',1,'2024-03-12','2024-03-31','Spring 2024'),(5,'CSCI 345',1,'2024-03-12','2024-03-31','Spring 2024'),(6,'CSCI 345',1,'2024-03-12','2024-03-31','Spring 2024'),(7,'CSCI 345',1,'2024-03-12','2024-03-31','Spring 2024');
-/*!40000 ALTER TABLE `classes` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `course_grades`
 --
 
@@ -95,16 +82,6 @@ CREATE TABLE `course_grades` (
   CONSTRAINT `user_id_key` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `course_grades`
---
-
-LOCK TABLES `course_grades` WRITE;
-/*!40000 ALTER TABLE `course_grades` DISABLE KEYS */;
-INSERT INTO `course_grades` VALUES (7,1,NULL,NULL),(7,2,NULL,NULL),(7,3,NULL,NULL),(7,4,NULL,NULL),(7,5,NULL,NULL),(7,6,NULL,NULL);
-/*!40000 ALTER TABLE `course_grades` ENABLE KEYS */;
-UNLOCK TABLES;
 
 --
 -- Table structure for table `users`
@@ -125,16 +102,6 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `users`
---
-
-LOCK TABLES `users` WRITE;
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'George Salayka','gsalay01@nyit.edu','test12345','teacher','Potatos','Sandwiches',NULL),(2,'Francesco Demarco','fdemarco@nyit.edu','password1234','admin','TEst','Test',NULL),(3,NULL,'bob@potato.com','$2y$10$SyHveQs5A.Tf2IYJYNL9f.6EziIHM4Q.JgQyqeUq0iJybbjHDib.m',NULL,NULL,NULL,NULL),(4,NULL,'kaebly01@nyit.edu','$2y$10$OTGNF4w/.jihbafif4qN1OxN4lWdN6I9VM0HO0i.qJIYfk1gQN8oq',NULL,NULL,NULL,NULL),(5,'Francesco','funnyemail.@email.com','$2y$10$wky5ekVjKvd1ayPxuXtWzeO52vHpSLhqGma3kVmXg7yYzY1Xw1Rsi','admin',NULL,NULL,'Demarco'),(6,'frank','email','$2y$10$SqRey/w26x0NzImHFOLvDe8hR04EDvFB5sanmQNhTUntKulG7rf9y','admin',NULL,NULL,'dem'),(7,'stu','student@email.com','$2y$10$QCMenLSjZA3O7NgHh7aDs.qoTUVnFFNYM7fJkY9kQMP3T.qUiR30m','student',NULL,NULL,'dent');
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
-UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -145,4 +112,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-04-05  9:18:22
+-- Dump completed on 2024-04-05 10:32:46
