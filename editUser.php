@@ -163,7 +163,7 @@ if($stmt = $pdo->prepare($sql)) {
     </div>
     <div id="primary-window" class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark ">
         <h1>Change Personal Information:</h1>
-        <form action="editUserProcessor.php" method="post">
+        <form action="processor/editUserProcessor.php" method="post">
             <label for="fname">First name:</label><br>
             <input type="text" id="fname" name="fname" value="<?= $fname?>"><br>
             <label for="lname">Last name:</label><br>

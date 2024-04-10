@@ -1,5 +1,5 @@
 <?php
-require_once "config.php";
+require_once "../config.php";
 $pdo = getDBConnection();
 
 $id = $_POST["id"];
@@ -62,10 +62,10 @@ if($stmt = $pdo->prepare($sql))
 //            echo "</ol></li>";
         }
 //        echo "</ol>";
-        header("location: editClasses.php?status=success"); //add a parameter here with a success statmenet
+        header("location: ../editClasses.php?status=success"); //add a parameter here with a success statmenet
     }
     else{
-        header("location: editClasses.php?status=failure"); //add a parameter here with a failure statmenet
+        header("location: ../editClasses.php?status=failure"); //add a parameter here with a failure statmenet
     }
 }
 ?>

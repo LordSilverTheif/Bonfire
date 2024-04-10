@@ -156,7 +156,7 @@ if($stmt = $pdo->prepare($sql)) {
     <div id="primary-window" class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark ">
         <h1 class="my-5">Add User</h1>
         <div>
-            <form action="addUserProcessor.php" method="post">
+            <form action="processor/addUserProcessor.php" method="post">
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="inputEmail">Email</label>

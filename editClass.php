@@ -206,7 +206,7 @@ if($stmt3 = $pdo->prepare($sql3)) {
     </div>
     <div id="primary-window" class="d-flex overflow-y-scroll flex-column flex-shrink-0 p-3 text-bg-dark ">
         <h1>Edit Class:</h1>
-        <form action="editClassProcessor.php" method="post">
+        <form action="processor/editClassProcessor.php" method="post">
             <!--        <form action="FormData.php" method="post">-->
             <label for="cname">Class Name:</label><br>
             <input type="text" id="cname" name="cname" value="<?= $class_name?>"><br>

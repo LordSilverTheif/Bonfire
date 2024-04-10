@@ -1,5 +1,5 @@
 <?php
-require_once "config.php";
+require_once "../config.php";
 $pdo = getDBConnection();
 
 $id = $_POST["id"];
@@ -13,7 +13,7 @@ if($stmt = $pdo->prepare($sql))
     $stmt->bindParam(":id", $id, PDO::PARAM_INT);
     if($stmt->execute())
     {
-        header("location: editClasses.php");
+        header("location: ../editClasses.php");
     }
 }
 ?>

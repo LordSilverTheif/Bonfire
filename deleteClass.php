@@ -205,7 +205,7 @@ if($stmt = $pdo->prepare($sql)) {
             </table>
         </div>
 
-    <form action="deleteClassProcessor.php" method="post">
+    <form action="processor/deleteClassProcessor.php" method="post">
         <input type="hidden" name="id" value="<?= $class_id ?>">
         <input type="submit" value="Yes, delete this class.">
     </form>

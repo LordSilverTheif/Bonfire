@@ -1,5 +1,5 @@
 <?php
-require_once "config.php";
+require_once "../config.php";
 $pdo = getDBConnection();
 
 $fname = $_POST["fname"];
@@ -18,7 +18,7 @@ if($stmt = $pdo->prepare($sql))
     $stmt->bindParam(":role", $role, PDO::PARAM_STR);
     if($stmt->execute())
     {
-        header("location: editUsers.php");
+        header("location: ../editUsers.php");
     }
 }
 

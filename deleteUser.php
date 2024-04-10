@@ -189,7 +189,7 @@ if($stmt = $pdo->prepare($sql)) {
             </table>
         </div>
 
-        <form action="deleteUserProcessor.php" method="post">
+        <form action="processor/deleteUserProcessor.php" method="post">
             <input type="hidden" name="id" value="<?= $id ?>">
             <input type="submit" value="Yes, delete this user.">
         </form>
