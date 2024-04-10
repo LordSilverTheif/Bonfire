@@ -37,6 +37,10 @@ CREATE TABLE `assignments` (
   `assignment_name` varchar(255) DEFAULT NULL,
   `grade` varchar(255) DEFAULT NULL,
   `class_id` int NOT NULL,
+  `max_grade` int NOT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `due_date` datetime DEFAULT NULL,
+  `category` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`),
   KEY `class_id_idx` (`class_id`),
@@ -112,4 +116,4 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2024-04-07 17:45:48
+-- Dump completed on 2024-04-10  9:33:14
