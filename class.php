@@ -185,7 +185,7 @@ if($stmt=$pdo->prepare($sql))
                 <ul class="nav nav-pills">
                     <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Class Home</a></li>
                     <li class="nav-item"><a href="#" class="nav-link">Announcements</a></li>
-                    <li class="nav-item"><a href="#" class="nav-link">Assignments</a></li>
+                    <li class="nav-item"><a href="assignments.php" class="nav-link">Assignments</a></li>
                     <li class="nav-item"><a href="#" class="nav-link">People</a></li>
                     <li class="nav-item"><a href="#" class="nav-link">Grades</a></li>
                     <li class="nav-item"><a href="#" class="nav-link">Syllabus</a></li>
