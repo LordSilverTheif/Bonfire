@@ -189,7 +189,7 @@ if($stmt = $pdo->prepare($sql)) {
         </div>
     </div>
     <div id="primary-window" class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark">
-        <h1 class="my-5">Hi, <b><?php echo $firstName; ?></b>. Welcome to our site.</h1>
+        <h1 class="my-5">Hi, <b><?php echo $firstName; ?></b>. Hi, Welcome to our site.</h1>
         <?php
         if($role == "student"){
             ?>
@@ -198,7 +198,9 @@ if($stmt = $pdo->prepare($sql)) {
                 foreach($rows as $row)
                 {
                     ?>
+
                     <div class="card flex-grid-card" style="width: 18rem;">
+                        <a href="class.php?classid=<?= $row['id'] ?>">
                         <img src="resources/images/class_stock_photo.jpg" class="card-img-top" alt="...">
                         <div class="card-body">
                             <h5 class="card-title"><?= $row["class_name"] ?></h5>
@@ -207,6 +209,7 @@ if($stmt = $pdo->prepare($sql)) {
                             <p class="card-text"> Start Date: <?= $row["start_date"]?></p>
                             <p class="card-text"> End Date: <?= $row["end_date"]?></p>
                         </div>
+                        </a>
                     </div>
 
                     <?php

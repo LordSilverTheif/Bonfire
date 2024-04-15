@@ -7,10 +7,29 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: login.php");
     exit;
 }
-
+if(isset($_GET["classid"]))
+{
+    $_SESSION["currentclass"] = $_GET["classid"];
+}
 $firstName = htmlspecialchars($_SESSION["first_name"]);
 $role = $_SESSION["role"];
 //var_dump($_SESSION);
+require_once ('config.php');
+$pdo =getDBConnection();
+$sql = "Select * from classes where id = :id";
+if($stmt=$pdo->prepare($sql))
+{
+    $stmt->bindParam(":id", $param_id, PDO::PARAM_INT);
+    $param_id  = $_GET["classid"];
+    if($stmt->execute())
+    {
+        if($stmt->rowCount() == 1) {
+            if ($row = $stmt->fetch()) {
+                $className = $row["class_name"];
+            }
+        }
+    }
+}
 ?>
 
 <!DOCTYPE html>
@@ -161,37 +180,28 @@ $role = $_SESSION["role"];
         </div>
     </div>
     <div id="primary-window" class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark">
-        <h1 class="my-5">Hi, <b><?php echo $firstName; ?></b>. Welcome to (Class name).</h1>
+        <div class="container">
+            <header class="d-flex justify-content-center py-3">
+                <ul class="nav nav-pills">
+                    <li class="nav-item"><a href="#" class="nav-link active" aria-current="page">Class Home</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">Announcements</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">Assignments</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">People</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">Grades</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">Syllabus</a></li>
+                    <li class="nav-item"><a href="#" class="nav-link">Modules</a></li>
+
+                </ul>
+            </header>
+        </div>
+        <h1 class="my-5">Hi, <b><?php echo $firstName; ?></b>. Welcome to <?=$className ?>.</h1>
         <?php
         if($role == "student"){
             ?>
-            <div class="flex-grid-wrapper">
-                <?php
-                foreach($rows as $row)
-                {
-                    ?>
-                    <div class="card flex-grid-card" style="width: 18rem;">
-                        <img src="resources/images/class_stock_photo.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title"><?= $row["name"] ?></h5>
-                            <!--                            <p class="card-text"> Teacher --><?php //= $row["first_name"] . " " .$row["last_name"]?><!--</p>-->
-                            <p class="card-text"> Term <?= $row["term"]?></p>
-                            <p class="card-text"> Start Date: <?= $row["start_date"]?></p>
-                            <p class="card-text"> End Date: <?= $row["end_date"]?></p>
-                        </div>
-                    </div>
 
-                    <?php
-                }
-                ?>
-            </div>
             <?php
         }
         ?>
-        <p>
-            <a href="reset-password.php" class="btn btn-warning">Reset Your Password</a>
-            <a href="logout.php" class="btn btn-danger ml-3">Sign Out of Your Account</a>
-        </p>
     </div>
 
 </main>
