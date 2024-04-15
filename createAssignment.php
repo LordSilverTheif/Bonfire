@@ -3,7 +3,7 @@
 session_start();
 require_once "config.php";
 // Check if the user is logged in, if not then redirect him to login page
-if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true || $_SESSION["role"] !== "admin"){
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true || $_SESSION["role"] !== "teacher"){
     header("location: login.php");
     exit;
 }
@@ -12,78 +12,14 @@ $firstName = htmlspecialchars($_SESSION["first_name"]);
 $role = $_SESSION["role"];
 
 $pdo = getDBConnection();
-$sql = "SELECT c.id, c.class_name, c.start_date, c.end_date, 
-       c.term, u.first_name, u.last_name FROM classes c
-        Join users u on c.teacher_id = u.id WHERE c.id = :class_id
-";
-$sql2= "Select * from users where role = 'teacher'";
-if($stmt2 = $pdo->prepare($sql2))
-{
-    if($stmt2->execute())
-    {
-        if($teacherRows =$stmt2->fetchAll())
-        {
-//            echo "success on teacher fetch";
-        }
-        else{
-            echo "teacher fetch error";
-        }
-    }
-    else{
-        echo "teacher execute error";
-    }
-}
-else{
-    echo "prepare error";
-}
 
-if($stmt = $pdo->prepare($sql)) {
-// Bind variables to the prepared statement as parameters
-// Attempt to execute the prepared statement
-
-    $stmt->bindParam(":class_id", $class_id, PDO::PARAM_INT);
-    $class_id = $_GET["id"];
-
-    if ($stmt->execute()) {
-//        echo "execute select class";
-        if($stmt->rowCount() == 1){
-//            echo "row count1 on select class";
-            if($row = $stmt->fetch()) {
-//                echo "fetch ";
-                $class_id = $row["id"];
-                $class_name =$row["class_name"];
-                $currentTeacherId=$row["teacher_id"];
-                $start_date =$row["start_date"];
-                $end_date= $row["end_date"];
-                $term =$row["term"];
-                $currentTeacherFirst=$row["first_name"];
-                $currentTeacherLast=$row["last_name"];
-                //var_dump($row);
-            }
-        }
-    }
-    //echo $currentTeacherId;
-}
-
-$sql3 = "SELECT * FROM users WHERE role = 'student'";
-
-if($stmt3 = $pdo->prepare($sql3)) {
-// Bind variables to the prepared statement as parameters
-// Attempt to execute the prepared statement
-    if ($stmt3->execute()) {
-        $rows = $stmt3->fetchAll();
-        //echo 'acquired students';
-    }
-}
-
-//var_dump($_SESSION);
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Add Classes</title>
+    <title>Welcome</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="resources/stylesheets/style.css">
     <style>
@@ -154,11 +90,62 @@ if($stmt3 = $pdo->prepare($sql3)) {
     </symbol>
 </svg>
 <main class="d-flex flex-nowrap">
-    <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark">
-        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none ">
+    <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark" style="width: 280px;">
+        <a href="dashboard.php" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
             <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bonfire"></use></svg>
             <span class="fs-4">Bonfire</span>
         </a>
+        <hr>
+        <ul class="nav nav-pills flex-column mb-auto">
+            <li>
+                <a href="dashboard.php" class="nav-link text-white left-menu-item">
+                    <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
+                    Home
+                </a>
+            </li>
+            <li>
+                <a href="class/announcement.php" class="nav-link text-white left-menu-item">
+                    <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
+                    Course Announcements
+                </a>
+            </li>
+            <li>
+                <a href="#" class="nav-link text-white left-menu-item">
+                    <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
+                    Syllabus
+                </a>
+            </li>
+            <li>
+                <a href="#" class="nav-link text-white left-menu-item">
+                    <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
+                    Zoom
+                </a>
+            </li>
+            <li>
+                <a href="assignments.php" class="nav-link text-white left-menu-item">
+                    <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
+                    Assignments
+                </a>
+            </li>
+            <li>
+                <a href="#" class="nav-link text-white left-menu-item">
+                    <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
+                    Exams
+                </a>
+            </li>
+            <li>
+                <a href="#" class="nav-link text-white left-menu-item">
+                    <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
+                    Files
+                </a>
+            </li>
+            <li>
+                <a href="#" class="nav-link text-white left-menu-item">
+                    <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
+                    Communication
+                </a>
+            </li>
+        </ul>
         <hr>
         <ul class="nav nav-pills flex-column mb-auto">
             <!-- Admin Section -->
@@ -181,15 +168,6 @@ if($stmt3 = $pdo->prepare($sql3)) {
                 <?php
             }
             ?>
-            <li>
-                <a href="dashboard.php" class="nav-link text-white left-menu-item">
-                    <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
-                    Dashboard
-                </a>
-            </li>
-
-        </ul>
-        <hr>
         <div class="dropdown">
             <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                 <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
@@ -198,84 +176,51 @@ if($stmt3 = $pdo->prepare($sql3)) {
             <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
                 <!--                <li><a class="dropdown-item" href="#">New project...</a></li>-->
                 <!--                <li><a class="dropdown-item" href="#">Settings</a></li>-->
-                <li><a class="dropdown-item" href="profile.php">Profile</a></li>
+                <li><a class="dropdown-item" href="#">Profile</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li><a class="dropdown-item" href="reset-password.php">Reset Password</a></li>
                 <li><a class="dropdown-item" href="logout.php">Sign out</a></li>
             </ul>
         </div>
     </div>
-    <div id="primary-window" class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark overflow-y-scroll">
-        <h1>Create Class:</h1>
-        <form action="processor/addClassProcessor.php" method="post">
-            <label for="cname">Class Name:</label><br>
-            <input type="text" id="cname" name="cname" value="<?= $class_name?>"><br>
-            <label for="sdate">Start Date:</label><br>
-            <input type="date" name="sdate" id="sdate"><br>
-            <label for="edate">End Date:</label><br>
-            <input type="date" name="edate" id="edate"><br>
-            <label for="term">Term: </label><br>
-            <select name="term" id="term">
-                <option value="Spring">Spring</option>
-                <option value="Fall">Fall</option>
-                <!-- TODO: Fix this to use a database table with population in php -->
-            </select>
-            <br>
-            <label for="teacher">Teachers</label><br>
-            <select name="teacher" id="teacher">
-                <?php
-                foreach($teacherRows as $teacher )
-                {
-                    $teacherFirst = $teacher['first_name'];
-                    $teacherLast = $teacher['last_name'];
-                    $teacherId = $teacher['id'];
-                    ?>
-                    <option <?php echo ($teacherId == $currentTeacherId) ? "selected=selected" : ""?> value="<?= $teacherId?>"><?= $teacherLast.", ".$teacherFirst?></option>
-                    <?php
-                }
-                ?>
-            </select>
-            <input type="hidden" name="id" value="<?= $class_id ?>">
-            <input type="submit" value="Submit">
-            <table class="table table-striped table-hover">
-                <thead>
-                <tr>
-                    <th scope="col">id#</th>
-                    <th scope="col">First</th>
-                    <th scope="col">Last</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Add to</th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php
-                $count = 1;
-                foreach($rows as $row)
-                {
-                    $id = $row["id"];
-                    ?>
-                    <tr>
-                        <th scope="row"><?= $id?></th>
-                        <td><?= $row["first_name"] ?></td>
-                        <td><?= $row["last_name"] ?></td>
-                        <td><?= $row["email"] ?></td>
-                        <td><input name = "students[]" value = "<?= $id?>" type ="checkbox"></td>
-                    </tr>
-                    <?php
-                    $count++;
-                }
-                ?>
-                </tbody>
-            </table>
-        </form>
+    <div id="primary-window" class="d-flex overflow-y-scroll flex-column flex-shrink-0 p-3 text-bg-dark ">
+        <h1 class="my-5">Create Assignment</h1>
+        <div>
+            <form action="FormData.php"method="post">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputAssignment">Assignment Name</label>
+                        <input type="text" name="assignment" class="form-control" id="inputAssignment" placeholder="Enter assignment name here...">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputMaxGrade">Maximum Grade</label>
+                        <input type="number" name="grade" class="form-control" id="inputMaxGrade" placeholder="Enter max attainable grade. (number only)">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputDescription">Description</label>
+                        <textarea name="description" class="form-control" id="inputDescription" placeholder="Enter description..." rows="5" cols="40"></textarea>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputDueDate">Due Date</label>
+                        <input type="datetime-local" name = "datetime" class="form-control" id="inputDueDate" placeholder="Last Name">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="inputAssigmentCategory">Assigment Category</label>
+                        <select id="inputAssigmentCategory" class="form-control" name="assignmentcategory">
+                            <option selected value="homework">Homework</option>
+                            <option value="project">Project</option>
+                            <option value="quiz">Quiz</option>
+                            <option value="test">Test</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Create Assignment</button>
+            </form>
+        </div>
     </div>
 
-
 </main>
-<!-- end .container -->
-<!--       _
-       .__(.)< (Connor did it!)
-        \___)
-~~~~~~~~~~~~~~~~~~-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script></body>
 </html>
