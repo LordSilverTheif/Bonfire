@@ -23,8 +23,12 @@ if($stmt = $pdo->prepare($sql)) {
         $rows = $stmt->fetchAll();
     }
 }
-
+//echo "printing seession";
 //var_dump($_SESSION);
+//foreach ($rows as $row) {
+//    echo "printing class";
+//    var_dump($row);
+//}
 ?>
 
 <!DOCTYPE html>

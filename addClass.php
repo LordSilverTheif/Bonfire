@@ -155,7 +155,7 @@ if($stmt3 = $pdo->prepare($sql3)) {
 </svg>
 <main class="d-flex flex-nowrap">
     <div class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark">
-        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none ">
             <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bonfire"></use></svg>
             <span class="fs-4">Bonfire</span>
         </a>
@@ -205,7 +205,7 @@ if($stmt3 = $pdo->prepare($sql3)) {
             </ul>
         </div>
     </div>
-    <div id="primary-window" class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark ">
+    <div id="primary-window" class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark overflow-y-scroll">
         <h1>Create Class:</h1>
         <form action="processor/addClassProcessor.php" method="post">
             <label for="cname">Class Name:</label><br>
