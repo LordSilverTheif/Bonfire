@@ -1,3 +1,57 @@
+<?php
+// Initialize the session
+session_start();
+require_once "config.php";
+// Check if the user is logged in, if not then redirect him to login page
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
+    header("location: login.php");
+    exit;
+}
+
+$firstName = htmlspecialchars($_SESSION["first_name"]);
+$currentuserid = $_SESSION["id"];
+$role = $_SESSION["role"];
+//var_dump($_SESSION);
+$pdo = getDBConnection();
+if($role == "student") {
+    $sql = "SELECT c.id, c.class_name, c.start_date, c.end_date,
+        c.term
+        FROM classes c
+        join course_grades cg on cg.class_id =c.id
+        join users u on u.id =cg.user_id
+        where u.id = :id
+ ";
+
+    if ($stmt = $pdo->prepare($sql)) {
+// Bind variables to the prepared statement as parameters
+// Attempt to execute the prepared statement
+        $stmt->bindParam(":id", $userId, PDO::PARAM_INT);
+        $userId = $_SESSION["id"];
+        if ($stmt->execute()) {
+            $rows = $stmt->fetchAll();
+        }
+    }
+}
+else if($role == "teacher") {
+    $sql = "SELECT c.id, c.class_name, c.start_date, c.end_date,
+        c.term
+        FROM    classes c
+        where c.teacher_id = :id;
+ ";
+
+    if ($stmt = $pdo->prepare($sql)) {
+// Bind variables to the prepared statement as parameters
+// Attempt to execute the prepared statement
+        $stmt->bindParam(":id", $userId, PDO::PARAM_INT);
+        $userId = $_SESSION["id"];
+        if ($stmt->execute()) {
+            $rows = $stmt->fetchAll();
+        }
+    }
+}
+
+?>
+
 <div id="navbarToggleExternalContent" class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark">
     <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
         <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bonfire"></use></svg>
@@ -42,7 +96,7 @@
         <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
             <!--                <li><a class="dropdown-item" href="#">New project...</a></li>-->
             <!--                <li><a class="dropdown-item" href="#">Settings</a></li>-->
-            <li><a class="dropdown-item" href="profile.php">Profile</a></li>
+            <li><a class="dropdown-item" href="profile.php?userid=<?=$currentuserid ?>">Profile</a></li>
             <li><hr class="dropdown-divider"></li>
             <li><a class="dropdown-item" href="reset-password.php">Reset Password</a></li>
             <li><a class="dropdown-item" href="logout.php">Sign out</a></li>
