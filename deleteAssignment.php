@@ -12,6 +12,27 @@ $firstName = htmlspecialchars($_SESSION["first_name"]);
 $role = $_SESSION["role"];
 
 $pdo = getDBConnection();
+$sql = "SELECT * FROM assignments where id = :id";
+
+if($stmt = $pdo->prepare($sql)) {
+// Bind variables to the prepared statement as parameters
+    $stmt->bindParam(":id", $aID, PDO::PARAM_INT);
+    $aID = $_GET["id"];
+// Attempt to execute the prepared statement
+
+    if ($stmt->execute()) {
+        if($stmt->rowCount() == 1){
+            if($row = $stmt->fetch()) {
+                $id = $row["id"];
+                $asname = $row["assignment_name"];
+                $mgrade = $row["max_grade"];
+                $descr = $row["description"];
+                $ddate = $row["due_date"];
+                $categ = $row["category"];
+            }
+        }
+    }
+}
 
 ?>
 
@@ -168,59 +189,58 @@ $pdo = getDBConnection();
                 <?php
             }
             ?>
-        <div class="dropdown">
-            <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-                <strong><?php echo $firstName; ?></strong>
-            </a>
-            <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
-                <!--                <li><a class="dropdown-item" href="#">New project...</a></li>-->
-                <!--                <li><a class="dropdown-item" href="#">Settings</a></li>-->
-                <li><a class="dropdown-item" href="#">Profile</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="reset-password.php">Reset Password</a></li>
-                <li><a class="dropdown-item" href="logout.php">Sign out</a></li>
-            </ul>
-        </div>
+            <div class="dropdown">
+                <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
+                    <strong><?php echo $firstName; ?></strong>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
+                    <!--                <li><a class="dropdown-item" href="#">New project...</a></li>-->
+                    <!--                <li><a class="dropdown-item" href="#">Settings</a></li>-->
+                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <li><hr class="dropdown-divider"></li>
+                    <li><a class="dropdown-item" href="reset-password.php">Reset Password</a></li>
+                    <li><a class="dropdown-item" href="logout.php">Sign out</a></li>
+                </ul>
+            </div>
     </div>
-    <div id="primary-window" class="d-flex overflow-y-scroll flex-column flex-shrink-0 p-3 text-bg-dark ">
-        <h1 class="my-5">Create Assignment</h1>
-        <div>
-            <form action="createAssignmentProcessor.php?classid=<?= $_SESSION["currentclass"] ?>"method="post">
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="inputAssignment">Assignment Name</label>
-                        <input type="text" name="inputAssignment" class="form-control" id="inputAssignment" placeholder="Enter assignment name here...">
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="inputMaxGrade">Maximum Grade</label>
-                        <input type="number" name="inputMaxGrade" class="form-control" id="inputMaxGrade" placeholder="Enter max attainable grade. (number only)">
-                    </div>
-                    <div class="form-group col-md-6">
-                        <label for="inputDescription">Description</label>
-                        <textarea name="inputDescription" class="form-control" id="inputDescription" placeholder="Enter description..." rows="5" cols="40"></textarea>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-6">
-                        <label for="inputDueDate">Due Date</label>
-                        <input type="datetime-local" name = "inputDueDate" class="form-control" id="inputDueDate" placeholder="Last Name">
-                    </div>
-                    <div class="form-group col-md-4">
-                        <label for="inputAssigmentCategory">Assigment Category</label>
-                        <select id="inputAssigmentCategory" class="form-control" name="inputAssigmentCategory">
-                            <option selected value="homework">Homework</option>
-                            <option value="project">Project</option>
-                            <option value="quiz">Quiz</option>
-                            <option value="test">Test</option>
-                        </select>
-                    </div>
-                </div>
-                <button type="submit" class="btn btn-primary">Create Assignment</button>
-            </form>
+    <div id="primary-window" class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark ">
+        <h1>Delete Assignment:</h1>
+
+        <div id="primary-window" class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark ">
+            <h1 class="my-5">Are you sure you want to delete this assignment?</h1>
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">ID</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Max Grade</th>
+                    <th scope="col">Description</th>
+                    <th scope="col">Due Date</th>
+                    <th scope="col">Category</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <th scope="row"><?= $id?></th>
+                    <td><?= $row["assignment_name"] ?></td>
+                    <td><?= $row["max_grade"] ?></td>
+                    <td><?= $row["description"] ?></td>
+                    <td><?= $row["due_date"] ?></td>
+                    <td><?= $row["category"] ?></td>
+                </tr>
+
+                </tbody>
+            </table>
         </div>
+
+        <form action="deleteAssignmentProcessor.php" method="post">
+            <input type="hidden" name="id" value="<?= $id ?>">
+            <input type="submit" value="Yes, delete this assignment.">
+        </form>
     </div>
 
 </main>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script></body>
 </html>
+
