@@ -14,11 +14,12 @@ $classid = $_SESSION["currentclass"];
 //var_dump($_SESSION);
 
 $pdo = getDBConnection();
-$sql = "SELECT * FROM assignments WHERE class_id = '$classid'";
+$sql = "SELECT * FROM assignments WHERE class_id = :classid";
 
 if($stmt = $pdo->prepare($sql)) {
 // Bind variables to the prepared statement as parameters
 // Attempt to execute the prepared statement
+    $stmt->bindParam(":classid", $classid);
     if ($stmt->execute()) {
         $rows = $stmt->fetchAll();
     }
@@ -38,7 +39,7 @@ if($stmt = $pdo->prepare($sql)) {
         body{ font: 14px sans-serif; text-align: center; }
     </style>
 </head>
-<body>
+<>
 <?php include("svgImages.html"); ?>
 <main class="d-flex flex-nowrap">
     <?php include("leftSideMenu.php"); ?>
@@ -73,6 +74,7 @@ if($stmt = $pdo->prepare($sql)) {
         $count = 1;
         foreach($rows as $row)
         {
+//            var_dump($row);
             $id = $row["id"];
             ?>
             <tr>
@@ -107,7 +109,7 @@ if($stmt = $pdo->prepare($sql)) {
 
 
 </main>
-<script src="/docs/5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 <!-- end .container -->
 <!--       _

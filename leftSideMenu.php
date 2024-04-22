@@ -11,44 +11,6 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 $firstName = htmlspecialchars($_SESSION["first_name"]);
 $currentuserid = $_SESSION["id"];
 $role = $_SESSION["role"];
-//var_dump($_SESSION);
-$pdo = getDBConnection();
-if($role == "student") {
-    $sql = "SELECT c.id, c.class_name, c.start_date, c.end_date,
-        c.term
-        FROM classes c
-        join course_grades cg on cg.class_id =c.id
-        join users u on u.id =cg.user_id
-        where u.id = :id
- ";
-
-    if ($stmt = $pdo->prepare($sql)) {
-// Bind variables to the prepared statement as parameters
-// Attempt to execute the prepared statement
-        $stmt->bindParam(":id", $userId, PDO::PARAM_INT);
-        $userId = $_SESSION["id"];
-        if ($stmt->execute()) {
-            $rows = $stmt->fetchAll();
-        }
-    }
-}
-else if($role == "teacher") {
-    $sql = "SELECT c.id, c.class_name, c.start_date, c.end_date,
-        c.term
-        FROM    classes c
-        where c.teacher_id = :id;
- ";
-
-    if ($stmt = $pdo->prepare($sql)) {
-// Bind variables to the prepared statement as parameters
-// Attempt to execute the prepared statement
-        $stmt->bindParam(":id", $userId, PDO::PARAM_INT);
-        $userId = $_SESSION["id"];
-        if ($stmt->execute()) {
-            $rows = $stmt->fetchAll();
-        }
-    }
-}
 
 ?>
 
