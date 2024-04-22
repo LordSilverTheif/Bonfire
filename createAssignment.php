@@ -33,29 +33,29 @@ $pdo = getDBConnection();
     <div id="primary-window" class="d-flex overflow-y-scroll flex-column flex-shrink-0 p-3 text-bg-dark ">
         <h1 class="my-5">Create Assignment</h1>
         <div>
-            <form action="FormData.php"method="post">
+            <form action="createAssignmentProcessor.php?classid=<?= $_SESSION["currentclass"] ?>"method="post">
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="inputAssignment">Assignment Name</label>
-                        <input type="text" name="assignment" class="form-control" id="inputAssignment" placeholder="Enter assignment name here...">
+                        <input type="text" name="inputAssignment" class="form-control" id="inputAssignment" placeholder="Enter assignment name here...">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="inputMaxGrade">Maximum Grade</label>
-                        <input type="number" name="grade" class="form-control" id="inputMaxGrade" placeholder="Enter max attainable grade. (number only)">
+                        <input type="number" name="inputMaxGrade" class="form-control" id="inputMaxGrade" placeholder="Enter max attainable grade. (number only)">
                     </div>
                     <div class="form-group col-md-6">
                         <label for="inputDescription">Description</label>
-                        <textarea name="description" class="form-control" id="inputDescription" placeholder="Enter description..." rows="5" cols="40"></textarea>
+                        <textarea name="inputDescription" class="form-control" id="inputDescription" placeholder="Enter description..." rows="5" cols="40"></textarea>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="inputDueDate">Due Date</label>
-                        <input type="datetime-local" name = "datetime" class="form-control" id="inputDueDate" placeholder="Last Name">
+                        <input type="datetime-local" name = "inputDueDate" class="form-control" id="inputDueDate" placeholder="Last Name">
                     </div>
                     <div class="form-group col-md-4">
                         <label for="inputAssigmentCategory">Assigment Category</label>
-                        <select id="inputAssigmentCategory" class="form-control" name="assignmentcategory">
+                        <select id="inputAssigmentCategory" class="form-control" name="inputAssigmentCategory">
                             <option selected value="homework">Homework</option>
                             <option value="project">Project</option>
                             <option value="quiz">Quiz</option>
