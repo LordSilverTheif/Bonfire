@@ -12,6 +12,7 @@ $firstName = htmlspecialchars($_SESSION["first_name"]);
 $role = $_SESSION["role"];
 //var_dump($_SESSION);
 $pdo = getDBConnection();
+
 if($role == "student") {
     $sql = "SELECT c.id, c.class_name, c.start_date, c.end_date,
         c.term
@@ -34,9 +35,10 @@ if($role == "student") {
 else if($role == "teacher") {
     $sql = "SELECT c.id, c.class_name, c.start_date, c.end_date,
         c.term
-        FROM classes c
+        FROM    classes c
         where c.teacher_id = :id;
  ";
+
 
     if ($stmt = $pdo->prepare($sql)) {
 // Bind variables to the prepared statement as parameters
@@ -48,6 +50,7 @@ else if($role == "teacher") {
         }
     }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -96,10 +99,10 @@ else if($role == "teacher") {
             <?php
         }
         ?>
-        <p>
-            <a href="reset-password.php" class="btn btn-warning">Reset Your Password</a>
-            <a href="logout.php" class="btn btn-danger ml-3">Sign Out of Your Account</a>
-        </p>
+<!--        <p>-->
+<!--            <a href="reset-password.php" class="btn btn-warning">Reset Your Password</a>-->
+<!--            <a href="logout.php" class="btn btn-danger ml-3">Sign Out of Your Account</a>-->
+<!--        </p>-->
     </div>
 
 </main>
