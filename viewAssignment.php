@@ -3,7 +3,7 @@
 session_start();
 require_once "config.php";
 // Check if the user is logged in, if not then redirect him to login page
-if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true || $_SESSION["role"] !== "teacher"){
+if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: login.php");
     exit;
 }
@@ -34,6 +34,7 @@ if($stmt = $pdo->prepare($sql)) {
     }
 }
 
+
 ?>
 
 <!DOCTYPE html>
@@ -52,43 +53,38 @@ if($stmt = $pdo->prepare($sql)) {
     <?php include("leftSideMenu.php")?>
     <div id="primary-window" class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark overflow-y-scroll">
         <?php include("classTopMenu.php"); ?>
-    <div id="primary-window" class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark overflow-y-scroll">
-        <h1 class="my-5">Edit Assignment</h1>
+    <div id="primary-window" style="margin:auto" class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark overflow-y-scroll">
+        <h1 class="my-5">View Assignment</h1>
         <div>
-            <form action="editAssignmentProcessor.php?classid=<?= $_SESSION["currentclass"] ?>"method="post">
+            <form action="#"method="post">
                 <div class="form-row">
                     <div style="margin:auto"  class="form-group col-md-6">
                         <label for="inputAssignment">Assignment Name</label>
-                        <input type="text" name="inputAssignment" class="form-control" id="inputAssignment" value="<?= $asname?>" placeholder="Enter assignment name here...">
+                        <input type="text" name="inputAssignment" class="form-control" id="inputAssignment" value="<?= $asname?>" readonly>
                     </div>
                     <div style="margin:auto"  class="form-group col-md-6">
                         <label for="inputMaxGrade">Maximum Grade</label>
-                        <input type="number" name="inputMaxGrade" class="form-control" id="inputMaxGrade" value="<?= $mgrade?>" placeholder="Enter max attainable grade. (number only)">
+                        <input type="number" name="inputMaxGrade" class="form-control" id="inputMaxGrade" value="<?= $mgrade?>" readonly>
                     </div>
                     <div style="margin:auto"  class="form-group col-md-6">
                         <label for="inputDescription">Description</label>
-                        <textarea name="inputDescription" class="form-control" id="inputDescription" placeholder="Enter Description..." rows="5" cols="40"></textarea>
+                        <textarea name="inputDescription" class="form-control" id="inputDescription" placeholder="<?php echo htmlspecialchars($descr); ?>" rows="5" cols="40" readonly></textarea>
                     </div>
                 </div>
                 <div class="form-row">
                     <div style="margin:auto"  class="form-group col-md-6">
                         <label for="inputDueDate">Due Date</label>
-                        <input type="datetime-local" name = "inputDueDate" class="form-control" id="inputDueDate" value="<?= $ddate?>">
+                        <input type="datetime-local" name = "inputDueDate" class="form-control" id="inputDueDate" value="<?= $ddate?>" readonly>
                     </div>
-                    <div style="margin:auto" class="form-group col-md-4">
-                        <label for="inputAssigmentCategory">Assigment Category</label>
-                        <select id="inputAssigmentCategory" class="form-control" name="inputAssigmentCategory">
-                            <option selected value="Homework">Homework</option>
-                            <option value="Project">Project</option>
-                            <option value="Quiz">Quiz</option>
-                            <option value="Test">Test</option>
-                        </select>
+                    <div style="margin:auto"  class="form-group col-md-6">
+                        <label for="inputAssignment">Assignment Category</label>
+                        <input type="text" name="inputAssignment" class="form-control" id="inputAssignment" value="<?= $categ?>" readonly>
                     </div>
                 </div>
                 <br>
-                <input type="hidden" name="id" value="<?= $id ?>">
-                <button type="submit" class="btn btn-primary">Submit Changes</button>
             </form>
+            <input type="hidden" name="id" value="<?= $id ?>">
+            <button type="submit" class="btn btn-primary">Submit Assignment (placeholder)</button>
         </div>
     </div>
 

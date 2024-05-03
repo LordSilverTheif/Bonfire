@@ -39,11 +39,12 @@ if($stmt = $pdo->prepare($sql)) {
         body{ font: 14px sans-serif; text-align: center; }
     </style>
 </head>
-<>
 <?php include("svgImages.html"); ?>
 <main class="d-flex flex-nowrap">
-    <?php include("leftSideMenu.php"); ?>
-    <div id="primary-window" class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark">
+    <?php include("leftSideMenu.php")?>
+    <div id="primary-window" class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark overflow-y-scroll">
+        <?php include("classTopMenu.php"); ?>
+    <div id="primary-window " class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark overflow-y-scroll">
         <h1 class="my-5">Assignments.</h1>
         <?php
         if($role == "teacher"){
@@ -59,11 +60,11 @@ if($stmt = $pdo->prepare($sql)) {
         <table class="table table-striped table-hover"
         <thead>
         <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Name</th>
+            <th scope="col">Assignment</th>
             <th scope="col">Max Grade</th>
             <th scope="col">Description</th>
             <th scope="col">Due Date</th>
+            <th scope="col">Availability</th>
             <th scope="col">Category</th>
             <th scope="col">Actions</th>
 
@@ -78,14 +79,47 @@ if($stmt = $pdo->prepare($sql)) {
             $id = $row["id"];
             ?>
             <tr>
-                <th scope="row"><?= $id?></th>
                 <td><?= $row["assignment_name"] ?></td>
                 <td><?= $row["max_grade"] ?></td>
                 <td><?= $row["description"] ?></td>
                 <td><?= $row["due_date"] ?></td>
+                <td>
+                <?php
+                date_default_timezone_set("America/New_York");
+                if(strtotime(date_default_timezone_get())<strtotime($row["due_date"])){
+                    ?>
+                    Open
+                    <?php
+                }
+                ?>
+                    <?php
+                    date_default_timezone_set("America/New_York");
+                    if(strtotime(date_default_timezone_get())>strtotime($row["due_date"])){
+                        ?>
+                        Closed
+                        <?php
+                    }
+                    ?>
+                </td>
                 <td><?= $row["category"] ?></td>
                 <td>
-                    <a href="editAssignment.php?id=<?= $id?>" class="btn btn-info">View</a>
+                    <?php
+                    date_default_timezone_set("America/New_York");
+                    if(strtotime(date_default_timezone_get())<strtotime($row["due_date"])){
+                        ?>
+                        <a href="viewAssignment.php?id=<?= $id?>" class="btn btn-info">View</a>
+                        <?php
+                    }
+                    ?>
+                    <?php
+                    date_default_timezone_set("America/New_York");
+                    if(strtotime(date_default_timezone_get())>strtotime($row["due_date"])){
+                        ?>
+                        <button type="button" class="btn btn-danger" disabled> Closed</button>
+                        <?php
+                    }
+                    ?>
+
                     <?php
                     if($role == "teacher"){
                         ?>
