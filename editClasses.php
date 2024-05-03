@@ -13,7 +13,7 @@ $role = $_SESSION["role"];
 
 $pdo = getDBConnection();
 $sql = "SELECT c.id, c.class_name, c.start_date, c.end_date, 
-       c.term, u.first_name, u.last_name FROM classes c
+       c.term,c.is_active, u.first_name, u.last_name FROM classes c
         Join users u on c.teacher_id = u.id";
 
 if($stmt = $pdo->prepare($sql)) {
@@ -55,6 +55,7 @@ if($stmt = $pdo->prepare($sql)) {
             <?php
             foreach($rows as $row)
             {
+                if($row["is_active"]){
                 $class_id = $row["id"];
                 ?>
                 <div class="card flex-grid-card" style="width: 18rem;">
@@ -66,11 +67,12 @@ if($stmt = $pdo->prepare($sql)) {
                         <p class="card-text"> Start Date: <?= $row["start_date"]?></p>
                         <p class="card-text"> End Date: <?= $row["end_date"]?></p>
                         <a href="editClass.php?id=<?= $class_id?>" class="btn btn-info">Edit</a>
-                        <a href="deleteClass.php?id=<?= $class_id?>" class="btn btn-danger">Delete</a>
+                        <a href="deleteClass.php?id=<?= $class_id?>" class="btn btn-danger">Archive</a>
                     </div>
                 </div>
 
                 <?php
+            }
             }
             ?>
         </div>

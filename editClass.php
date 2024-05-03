@@ -65,8 +65,11 @@ if($stmt = $pdo->prepare($sql)) {
     //echo $currentTeacherId;
 }
 
-$sql3 = "SELECT * FROM users WHERE role = 'student'";
-
+$sql3 = "SELECT * FROM users u
+         WHERE role = 'student'";
+//$sql3 = "SELECT u.id, u.first_name, u.last_name, u.email, cg.class_id FROM users u
+//         join course_grades cg on u.id = cg.user_id
+//         WHERE role = 'student'";
 if($stmt3 = $pdo->prepare($sql3)) {
 // Bind variables to the prepared statement as parameters
 // Attempt to execute the prepared statement
@@ -253,6 +256,7 @@ if($stmt3 = $pdo->prepare($sql3)) {
                 $count = 1;
                 foreach($rows as $row)
                 {
+                    $alreadyInClass = $row["class_id"] ==  $class_id;
                     $id = $row["id"];
                     ?>
                     <tr>
@@ -260,7 +264,11 @@ if($stmt3 = $pdo->prepare($sql3)) {
                         <td><?= $row["first_name"] ?></td>
                         <td><?= $row["last_name"] ?></td>
                         <td><?= $row["email"] ?></td>
-                        <td><input name = "students[]" value = "<?= $id?>" type ="checkbox"></td>
+                        <td><input name = "students[]" value = "<?= $id?>" type ="checkbox" <?php
+//                           if($alreadyInClass){
+//                               echo "checked = 'checked'";
+//                           }
+                        ?> ></td>
                     </tr>
                     <?php
                     $count++;
