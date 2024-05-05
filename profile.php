@@ -56,7 +56,7 @@ if($stmt=$pdo->prepare($sql))
     <div id="primary-window" class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark">
         <h1 class="my-5">Hi, <b><?= $row["first_name"] ?></b>. Welcome to your profile.</h1>
 
-        <img src="https://github.com/mdo.png" alt="" width="350" height="350" class="rounded-circle" id="profilepic">
+        <img src="avatars/user-<?= $param_id?>.jpg" alt="" width="350" height="350" class="rounded-circle" id="profilepic">
         <form action="processor/editUserProcessor.php" method="post" >
             <label class="user-firstname" for="fname">First name:</label><br>
             <input class ="user-information-fname" type="text" id="fname" name="fname" value="<?= $row["first_name"] ?>" ><br>
@@ -65,6 +65,12 @@ if($stmt=$pdo->prepare($sql))
             <label class="user-email" for="email">Email:</label><br>
             <input class ="user-information-email" type="text" id="email" name="email" value="<?= $row["email"] ?>"  disabled><br><br>
             <input type="hidden" name="id" value="<?= $currentid ?>">
+        </form>
+        <form action="processor/changeAvatarProcessor.php" method="post" enctype="multipart/form-data">
+            <label for="avatar">Upload a jpeg as your avatar:</label>
+            <input type="file" name="avatar" type="image/jpg"/>
+            <input type="hidden" name="id" value="<?= $currentid ?>">
+            <input type="submit" value="Upload"/>
         </form>
         <p>
             <a href="reset-password.php" class="btn btn-warning">Reset Your Password</a>
