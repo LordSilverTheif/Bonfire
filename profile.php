@@ -69,7 +69,7 @@ if($stmt=$pdo->prepare($sql))
         <form action="processor/changeAvatarProcessor.php" method="post" enctype="multipart/form-data">
             <label for="avatar">Upload a jpeg as your avatar:</label>
             <input type="file" name="avatar" type="image/jpg"/>
-            <input type="hidden" name="id" value="<?= $currentid ?>">
+            <input type="hidden" name="userid" value="<?= $currentid ?>">
             <input type="submit" value="Upload"/>
         </form>
         <p>
