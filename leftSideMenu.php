@@ -11,7 +11,14 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 $firstName = htmlspecialchars($_SESSION["first_name"]);
 $currentuserid = $_SESSION["id"];
 $role = $_SESSION["role"];
-
+$imageString = "avatars/user-$currentuserid.jpg";
+if(file_exists($imageString))
+{
+    $profileImage = $imageString;
+}
+else{
+    $profileImage = "avatars/default.jpg";
+}
 ?>
 
 <div id="navbarToggleExternalContent" class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark">
@@ -52,7 +59,7 @@ $role = $_SESSION["role"];
     <hr>
     <div class="dropdown">
         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="avatars/user-<?=$currentuserid?>.jpg" alt="" width="32" height="32" class="rounded-circle me-2">
+            <img src="<?=$profileImage?>" alt="" width="32" height="32" class="rounded-circle me-2">
             <strong><?php echo $firstName; ?></strong>
         </a>
         <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
