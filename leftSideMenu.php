@@ -11,6 +11,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 $firstName = htmlspecialchars($_SESSION["first_name"]);
 $currentuserid = $_SESSION["id"];
 $role = $_SESSION["role"];
+
 $imageString = "avatars/user-$currentuserid.jpg";
 if(file_exists($imageString))
 {
@@ -19,6 +20,19 @@ if(file_exists($imageString))
 else{
     $profileImage = "avatars/default.jpg";
 }
+
+
+//Error checker for all pages
+if(isset($_GET["status"]))
+{
+    ?>
+    <script type="text/javascript">
+        let message = <?= $_GET["status"] ?>
+        alert(message);
+    </script>
+<?php
+}
+
 ?>
 
 <div id="navbarToggleExternalContent" class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark">
