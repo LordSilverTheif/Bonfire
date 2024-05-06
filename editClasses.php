@@ -15,11 +15,13 @@ $pdo = getDBConnection();
 $sql = "SELECT c.id, c.class_name, c.start_date, c.end_date, 
        c.term,c.is_active, u.first_name, u.last_name FROM classes c
         Join users u on c.teacher_id = u.id";
-
+// echo "before stmt";
 if($stmt = $pdo->prepare($sql)) {
+    // echo "stmt prepared";
 // Bind variables to the prepared statement as parameters
 // Attempt to execute the prepared statement
     if ($stmt->execute()) {
+        // echo "stmt executed";
         $rows = $stmt->fetchAll();
     }
 }

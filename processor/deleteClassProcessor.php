@@ -15,7 +15,14 @@ if($stmt = $pdo->prepare($sql))
     $stmt->bindParam(":id", $id, PDO::PARAM_INT);
     if($stmt->execute())
     {
-        header("location: ../editClasses.php");
+        header("location: ../editClasses.php?status=Class+Successfully+Archived!");
     }
+    else{
+        header("location: ../editClasses.php?status=Error+Archiving+Class!");
+    }
+}
+else
+{
+    header("location: ../editClasses.php?status=Error+Archiving+Class!");
 }
 ?>

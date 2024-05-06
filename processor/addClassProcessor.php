@@ -57,7 +57,7 @@ try {
                 echo "</ol></li>";
             }
             echo "</ol>";
-            if(mkdir("../class_data/${lastId}_${$cname}_${term}/assignments", 0777, true)) {
+            if(mkdir("../class_data/${lastId}_${cname}_${term}/assignments", 0777, true)) {
                 header("location: ../editClasses.php?status=success"); //add a parameter here with a success statmenet
             }
         } else {
