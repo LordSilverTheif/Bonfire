@@ -5,7 +5,7 @@
             <li class="nav-item btn btn-outline-secondary"><a href="#" class="nav-link" aria-current="page">Class Home</a></li>
             <li class="nav-item btn btn-outline-secondary""><a href="#" class="nav-link">Announcements</a></li>
             <li class="nav-item btn btn-outline-secondary""><a href="assignments.php?classid=<?= $_SESSION["currentclass"] ?>" class="nav-link">Assignments</a></li>
-            <li class="nav-item btn btn-outline-secondary""><a href="#" class="nav-link">People</a></li>
+            <li class="nav-item btn btn-outline-secondary""><a href="classRoster.php?classid=<?= $_SESSION["currentclass"] ?>" class="nav-link">People</a></li>
             <li class="nav-item btn btn-outline-secondary""><a href="#" class="nav-link">Grades</a></li>
             <li class="nav-item btn btn-outline-secondary""><a href="#" class="nav-link">Syllabus</a></li>
             <li class="nav-item btn btn-outline-secondary""><a href="#" class="nav-link">Modules</a></li>
