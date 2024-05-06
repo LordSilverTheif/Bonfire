@@ -12,6 +12,16 @@ $firstName = htmlspecialchars($_SESSION["first_name"]);
 $currentuserid = $_SESSION["id"];
 $role = $_SESSION["role"];
 
+$imageString = "avatars/user-$currentuserid.jpg";
+if(file_exists($imageString))
+{
+    $profileImage = $imageString;
+}
+else{
+    $profileImage = "avatars/default.jpg";
+}
+
+
 //Error checker for all pages
 if(isset($_GET["status"]))
 {
@@ -63,7 +73,7 @@ if(isset($_GET["status"]))
     <hr>
     <div class="dropdown">
         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="avatars/user-<?=$currentuserid?>.jpg" alt="" width="32" height="32" class="rounded-circle me-2">
+            <img src="<?=$profileImage?>" alt="" width="32" height="32" class="rounded-circle me-2">
             <strong><?php echo $firstName; ?></strong>
         </a>
         <ul class="dropdown-menu dropdown-menu-dark text-small shadow">
