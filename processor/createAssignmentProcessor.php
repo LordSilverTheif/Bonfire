@@ -1,5 +1,5 @@
 <?php
-require_once "config.php";
+require_once "../config.php";
 session_start();
 $pdo = getDBConnection();
 
@@ -24,7 +24,16 @@ try {
         $stmt->bindParam(":due_date", $ddate, PDO::PARAM_STR);
         $stmt->bindParam(":category", $categ, PDO::PARAM_STR);
         if($stmt->execute()){
-            header("location: ./assignments.php?status=success");
+            $lastId = $pdo->lastInsertId();
+            $newDir = "../class_data/$classid/assignments/assignment_$lastId";
+            echo "Directory will be: $newDir";
+            if(mkdir($newDir, 0777, true))
+            {
+                echo "directory created";
+                //header("location: ./assignments.php?status=success");
+
+            }
+
         }
     }
     else {

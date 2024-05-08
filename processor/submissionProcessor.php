@@ -1,22 +1,55 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
 <pre>
-    <?php
-        echo "post\n";
-        var_dump($_POST);
-        echo "get\n";
-        var_dump($_GET);
-        echo "files\n";
-        var_dump($_FILES);
-    ?>
-</pre>
-</body>
-</html>
+<?php
+    session_start();
+    require_once "../config.php";
+    $pdo = getDBConnection();
+    $studentId = $_POST["studentId"];
+    $assignmentId = $_POST["aID"];
+    $classId = $_SESSION["currentclass"];
+    $studentSubmissionDir = "../class_data/$classId/assignments/assignment_$assignmentId/student_$studentId";
+
+    if(mkdir($studentSubmissionDir, 0777, true)){
+        echo "folder created\n";
+    }
+        //For trying to do multiple file uploads on an assignment
+//        foreach ($_FILES["fileUpload"]["error"] as $key => $error) {
+//            if ($error == UPLOAD_ERR_OK) {
+//                $tmp_name = $_FILES["fileUpload"]["tmp_name"][$key];
+//                $name = basename($_FILES["fileUpload"]["name"][$key]);
+//                move_uploaded_file($tmp_name, "$studentSubmissionDir/$name");
+//            }
+//        }
+    $tmp_name = $_FILES["fileUpload"]["tmp_name"];
+    $name = basename($_FILES["fileUpload"]["name"]);
+    $finalPath= "$studentSubmissionDir/$name";
+    if(move_uploaded_file($tmp_name, $finalPath)){
+        $db_file_path ="class_data/$classId/assignments/assignment_$assignmentId/student_$studentId";
+        echo "file moved\n";
+        $sql = "insert into submission(assignment_id, student_id, file_path)
+                values (:assignment_id, :student_id, :file_path)";
+        if($stmt = $pdo->prepare($sql)){
+            echo "sql prepared\n";
+            $stmt->bindParam(":assignment_id", $assignmentId);
+            $stmt->bindParam(":student_id", $studentId);
+            $stmt->bindParam(":file_path", $db_file_path);
+            if($stmt->execute()){
+                echo "stmt executed\n";
+                header("location: ../viewAssignment.php?id=$assignmentId&status=Upload+Successful");
+            }
+            else{
+
+                header("location: ../viewAssignment.php?id=$assignmentId&status=Failure+Uploading");
+            }
+        }
+        else{
+            header("location: ../viewAssignment.php?id=$assignmentId&status=Failure+Uploading");
+        }
+    }
+    else{
+        header("location: ../viewAssignment.php?id=$assignmentId&status=Failure+Uploading");
+    }
+
+
+
+?>
+    </pre>

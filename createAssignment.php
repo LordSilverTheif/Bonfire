@@ -30,12 +30,12 @@ $pdo = getDBConnection();
 <?php include("svgImages.html"); ?>
 <main class="d-flex flex-nowrap">
     <?php include("leftSideMenu.php")?>
-    <div id="primary-window" class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark">
+    <div id="primary-window" class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark overflow-y-scroll">
         <?php include("classTopMenu.php"); ?>
-    <div id="primary-window" class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark ">
+    <div id="primary-window" class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark overflow-y-scroll">
         <h1 class="my-5">Create Assignment</h1>
         <div>
-            <form action="createAssignmentProcessor.php?classid=<?= $_SESSION["currentclass"] ?>"method="post">
+            <form action="processor/createAssignmentProcessor.php?classid=<?= $_SESSION["currentclass"] ?>" method="post">
                 <div class="form-row">
                     <div style="margin:auto"  class="form-group col-md-6">
                         <label for="inputAssignment">Assignment Name</label>

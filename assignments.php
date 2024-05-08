@@ -73,6 +73,7 @@ if($stmt = $pdo->prepare($sql)) {
         <tbody>
         <?php
         $count = 1;
+        //TODO: Add row potential join in sql to get if there is a submission for this student for this assignment and if so, put a field saying submitted
         foreach($rows as $row)
         {
 //            var_dump($row);
@@ -125,6 +126,7 @@ if($stmt = $pdo->prepare($sql)) {
                         ?>
                         <a href="editAssignment.php?id=<?= $id?>" class="btn btn-warning">Edit</a>
                         <a href="deleteAssignment.php?id=<?= $id?>" class="btn btn-danger">Delete</a>
+                        <a href="viewSubmissions.php?id=<?= $id?>" class="btn btn-danger">View Submissions</a>
                         <?php
                     }
                     ?>
