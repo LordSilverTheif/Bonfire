@@ -7,7 +7,7 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
     header("location: login.php");
     exit;
 }
-
+$studentId = $_SESSION["id"];
 $firstName = htmlspecialchars($_SESSION["first_name"]);
 $role = $_SESSION["role"];
 
@@ -56,7 +56,7 @@ if($stmt = $pdo->prepare($sql)) {
     <div id="primary-window" style="margin:auto" class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark overflow-y-scroll">
         <h1 class="my-5">View Assignment</h1>
         <div>
-            <form action="#"method="post">
+            <form action="processor/submissionProcessor.php" method="post" enctype="multipart/form-data">
                 <div class="form-row">
                     <div style="margin:auto"  class="form-group col-md-6">
                         <label for="inputAssignment">Assignment Name</label>
@@ -80,11 +80,17 @@ if($stmt = $pdo->prepare($sql)) {
                         <label for="inputAssignment">Assignment Category</label>
                         <input type="text" name="inputAssignment" class="form-control" id="inputAssignment" value="<?= $categ?>" readonly>
                     </div>
+                    <div>
+                        <label for="fileUpload">Upload a file to Submit</label>
+                        <input type="file" name="fileUpload" class="form-control" id="fileUpload">
+                    </div>
                 </div>
                 <br>
+                <input type="hidden" name="aID" value="<?= $aID ?>">
+                <input type="hidden" name="studentId" value="<?= $studentId ?>">
+                <button type="submit" class="btn btn-primary">Submit Assignment (placeholder)</button>
             </form>
-            <input type="hidden" name="id" value="<?= $id ?>">
-            <button type="submit" class="btn btn-primary">Submit Assignment (placeholder)</button>
+
         </div>
     </div>
 
