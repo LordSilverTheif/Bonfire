@@ -64,10 +64,10 @@ if($stmt = $pdo->prepare($sql)) {
 <main class="d-flex flex-nowrap">
     <?php include("leftSideMenu.php"); ?>
     <div id="primary-window" class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark ">
-        <h1 class="my-5">Delete Class</h1>
+        <h1 class="my-5">Archive Class</h1>
 
         <div id="primary-window" class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark ">
-            <h1 class="my-5">Are you sure you want to delete this class?</h1>
+            <h1 class="my-5">Are you sure you want to Archive this class?</h1>
             <table class="table table-striped table-hover">
                 <thead>
                 <tr>

@@ -57,7 +57,9 @@ try {
                 echo "</ol></li>";
             }
             echo "</ol>";
-            header("location: ../editClasses.php?status=success"); //add a parameter here with a success statmenet
+            if(mkdir("../class_data/${lastId}/assignments", 0777, true)) {
+                header("location: ../editClasses.php?status=success"); //add a parameter here with a success statmenet
+            }
         } else {
             header("location: ../editClasses.php?status=failure"); //add a parameter here with a failure statmenet
         }

@@ -35,6 +35,16 @@ if($stmt=$pdo->prepare($sql))
         }
     }
 }
+
+$imageString = "avatars/user-$param_id.jpg";
+if(file_exists($imageString))
+{
+    $profileImage = $imageString;
+}
+else{
+    $profileImage = "avatars/default.jpg";
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -56,7 +66,7 @@ if($stmt=$pdo->prepare($sql))
     <div id="primary-window" class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark">
         <h1 class="my-5">Hi, <b><?= $row["first_name"] ?></b>. Welcome to your profile.</h1>
 
-        <img src="https://github.com/mdo.png" alt="" width="350" height="350" class="rounded-circle" id="profilepic">
+        <img src="<?= $profileImage?>" alt="" width="350" height="350" class="rounded-circle" id="profilepic">
         <form action="processor/editUserProcessor.php" method="post" >
             <label class="user-firstname" for="fname">First name:</label><br>
             <input class ="user-information-fname" type="text" id="fname" name="fname" value="<?= $row["first_name"] ?>" ><br>
@@ -66,6 +76,12 @@ if($stmt=$pdo->prepare($sql))
             <input class ="user-information-email" type="text" id="email" name="email" value="<?= $row["email"] ?>"  disabled><br><br>
             <input type="hidden" name="id" value="<?= $currentid ?>">
         </form>
+        <form action="processor/changeAvatarProcessor.php" method="post" enctype="multipart/form-data">
+            <label for="avatar">Upload a jpeg as your avatar:</label>
+            <input type="file" name="avatar" type="image/jpg"/>
+            <input type="hidden" name="userid" value="<?= $currentid ?>">
+            <input type="submit" value="Upload"/>
+        </form>
         <p>
             <a href="reset-password.php" class="btn btn-warning">Reset Your Password</a>
             <a href="logout.php" class="btn btn-danger ml-3">Sign Out of Your Account</a>
@@ -73,7 +89,7 @@ if($stmt=$pdo->prepare($sql))
     </div>
 
 </main>
-<script src="/docs/5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script></body>
 </body>
 <!-- end .container -->
 <!--       _
