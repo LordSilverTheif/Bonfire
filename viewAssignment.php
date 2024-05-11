@@ -56,6 +56,20 @@ if($stmt = $pdo->prepare($sql)) {
     <div id="primary-window" style="margin:auto" class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark overflow-y-scroll">
         <h1 class="my-5">View Assignment</h1>
         <div>
+            <?php
+                $currentClass = $_SESSION['currentclass'];
+                $studentsUploadPath = "class_data/$currentClass/assignments/assignment_$aID/student_$studentId/";
+                $submissions = glob("$studentsUploadPath/*");
+                if(count($submissions) > 0){
+                    ?>
+                <h1>You have already submitted this assignment</h1>
+            <?php
+                }
+                else{
+
+
+            ?>
+
             <form action="processor/submissionProcessor.php" method="post" enctype="multipart/form-data">
                 <div class="form-row">
                     <div style="margin:auto"  class="form-group col-md-6">
@@ -88,9 +102,11 @@ if($stmt = $pdo->prepare($sql)) {
                 <br>
                 <input type="hidden" name="aID" value="<?= $aID ?>">
                 <input type="hidden" name="studentId" value="<?= $studentId ?>">
-                <button type="submit" class="btn btn-primary">Submit Assignment (placeholder)</button>
+                <button type="submit" class="btn btn-primary">Submit Assignment</button>
             </form>
-
+            <?php
+                }
+            ?>
         </div>
     </div>
 

@@ -34,10 +34,11 @@ $syllabusFile = "class_data/$classid/syllabus.pdf";
     </style>
 </head>
 <body>
-<?php include "svgImages.html"?>
+<?php include("svgImages.html"); ?>
 <main class="d-flex flex-nowrap">
-    <?php include "leftSideMenu.php" ?>
-
+    <?php include("leftSideMenu.php")?>
+    <div id="primary-window" class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark overflow-y-scroll">
+        <?php include("classTopMenu.php"); ?>
     <div id="primary-window" class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark overflow-y-scroll">
         <?php
             if(file_exists($syllabusFile))

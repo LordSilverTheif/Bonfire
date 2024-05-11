@@ -5,8 +5,11 @@ $pdo = getDBConnection();
 $id = $_POST["id"];
 
 
-$sql="DELETE FROM assignments
-          WHERE id = :id";
+//$sql="DELETE FROM assignments
+//          WHERE id = :id";
+$sql = "Update assignments
+set is_active = 0
+where id = :id";
 
 if($stmt = $pdo->prepare($sql))
 {

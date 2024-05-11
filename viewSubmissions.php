@@ -12,16 +12,16 @@ $firstName = htmlspecialchars($_SESSION["first_name"]);
 $role = $_SESSION["role"];
 $classid = $_SESSION["currentclass"];
 //var_dump($_SESSION);
-
+$assignmentId = $_GET['id'];
 $pdo = getDBConnection();
-$sql = "SELECT * FROM assignments 
-         
-         WHERE class_id = :classid";
-//join above with submissions, also add student id to the where clause
+$sql = "SELECT * FROM submission s
+         join users u on s.student_id = u.id
+         WHERE assignment_id = :assignment_id";
+
 if($stmt = $pdo->prepare($sql)) {
 // Bind variables to the prepared statement as parameters
 // Attempt to execute the prepared statement
-    $stmt->bindParam(":classid", $classid);
+    $stmt->bindParam(":assignment_id", $assignmentId);
     if ($stmt->execute()) {
         $rows = $stmt->fetchAll();
     }
@@ -47,65 +47,45 @@ if($stmt = $pdo->prepare($sql)) {
     <div id="primary-window" class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark overflow-y-scroll">
         <?php include("classTopMenu.php"); ?>
         <div id="primary-window " class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark overflow-y-scroll">
-            <h1 class="my-5">Your Grades.</h1>
-            <?php
-            if($role == "teacher"){
-                ?>
-                <div class="flex-grid-wrapper">
-                    <p>
-                        <a href="createAssignment.php?classid=<?= $_SESSION["currentclass"] ?>" class="btn btn-info">Make an assignment.</a>
-                    </p>
-                </div>
-                <?php
-            }
-            ?>
+            <h1 class="my-5">Submissions</h1>
+            <form action="processor/submitGradesProcessor.php" method="post">
             <table class="table table-striped table-hover"
             <thead>
             <tr>
-                <th scope="col">Assignment</th>
-                <th scope="col">Max Grade</th>
+                <th scope="col">#</th>
+                <th scope="col">Sid</th>
+                <th scope="col">Last Name</th>
+                <th scope="col">First Name</th>
+                <th scope="col">File</th>
+                <th scope="col">Status</th>
                 <th scope="col">Grade</th>
-                <th scope="col">Description</th>
-                <th scope="col">Due Date</th>
-                <th scope="col">Availability</th>
-                <th scope="col">Category</th>
-
-
             </tr>
             </thead>
             <tbody>
             <?php
             $count = 1;
+            //TODO: Add row potential join in sql to get if there is a submission for this student for this assignment and if so, put a field saying submitted
             foreach($rows as $row)
             {
-//            var_dump($row);
-                $id = $row["id"];
+                $id=$row["id"];
+                $absolutePath = $row['file_path'];
+                $fileName = basename($row['file_path']);
                 ?>
                 <tr>
-                    <td><?= $row["assignment_name"] ?></td>
-                    <td><?= $row["max_grade"] ?></td>
-                    <td>placeholder</td>
-                    <td><?= $row["description"] ?></td>
-                    <td><?= $row["due_date"] ?></td>
+                    <td><?=$count?></td>
+                    <td><?= $row["id"] ?></td>
+                    <td><?= $row["last_name"] ?></td>
+                    <td><?= $row["first_name"] ?></td>
                     <td>
-                        <?php
-                        date_default_timezone_set("America/New_York");
-                        if(strtotime(date_default_timezone_get())<strtotime($row["due_date"])){
-                            ?>
-                            Open
-                            <?php
-                        }
-                        ?>
-                        <?php
-                        date_default_timezone_set("America/New_York");
-                        if(strtotime(date_default_timezone_get())>strtotime($row["due_date"])){
-                            ?>
-                            Closed
-                            <?php
-                        }
-                        ?>
+                        <a href="<?=$absolutePath?>" download>
+                            <?= $fileName?>
+                        </a>
                     </td>
-                    <td><?= $row["category"] ?></td>
+                    <td><?= $row["grade"]==-1 ? "Not Graded" : "Grade Submitted" ?></td>
+                    <td>
+<!--                        TODO Make max pull the max grade from the db-->
+                        <input type="number" name="<?= $row['id']?>" id="grade" min="0" max = "100" value="<?= $row['grade'] != -1 ? $row['grade'] : ''?>"
+                    </td>
                 </tr>
                 <?php
                 $count++;
@@ -113,6 +93,10 @@ if($stmt = $pdo->prepare($sql)) {
             ?>
             </tbody>
             </table>
+                <input type="hidden" name="aID" value="<?= $assignmentId ?>">
+                <input type="submit" value="Submit Grades">
+            </form>
+            <a href = "downloadAllAssignments.php?class=<?=$classid?>&assignment=<?=$assignmentId?>" target="_blank">Download All Assignments</a>
         </div>
 
 
