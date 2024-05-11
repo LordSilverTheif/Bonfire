@@ -18,12 +18,9 @@ $role = $_SESSION["role"];
             <li class="nav-item btn btn-outline-secondary"><a href="class.php?classid=<?= $_SESSION["currentclass"] ?>" class="nav-link" aria-current="page">Class Home</a></li>
             <li class="nav-item btn btn-outline-secondary""><a href="announcements.php?classid=<?= $_SESSION["currentclass"] ?>" class="nav-link">Announcements</a></li>
             <li class="nav-item btn btn-outline-secondary""><a href="assignments.php?classid=<?= $_SESSION["currentclass"] ?>" class="nav-link">Assignments</a></li>
-
-            <li class="nav-item btn btn-outline-secondary""><a href="#" class="nav-link">People</a></li>
             <?php if($role == "teacher" || $role == "admin"){ ?> <li  class="nav-item btn btn-outline-secondary""><a href="viewStudentGrades.php?classid=<?= $_SESSION["currentclass"] ?>" class="nav-link">Grades </li></a></li> <?php } ?>
             <?php if($role == "student"){ ?> <li  class="nav-item btn btn-outline-secondary""><a href="viewGrades.php?classid=<?= $_SESSION["currentclass"] ?>" class="nav-link">Grades </li></a></li> <?php } ?>
             <li class="nav-item btn btn-outline-secondary""><a href="classRoster.php?classid=<?= $_SESSION["currentclass"] ?>" class="nav-link">People</a></li>
-            <li class="nav-item btn btn-outline-secondary""><a href="#" class="nav-link">Grades</a></li>
             <li class="nav-item btn btn-outline-secondary""><a href="syllabus.php?classid=<?= $_SESSION["currentclass"] ?> "class="nav-link">Syllabus</a></li>
             <?php
             if($role == "teacher")
