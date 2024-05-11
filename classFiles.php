@@ -11,19 +11,15 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 $firstName = htmlspecialchars($_SESSION["first_name"]);
 $role = $_SESSION["role"];
 $classid = $_SESSION["currentclass"];
-$id = $_SESSION["id"];
 //var_dump($_SESSION);
 
 $pdo = getDBConnection();
-$sql = "SELECT * FROM assignments a
-         join submission s on a.id = s.assignment_id
-         WHERE class_id = :classid and student_id = :student_id";
-//join above with submissions, also add student id to the where clause
+$sql = "SELECT * FROM files WHERE class_id = :class_id";
+
 if($stmt = $pdo->prepare($sql)) {
 // Bind variables to the prepared statement as parameters
 // Attempt to execute the prepared statement
-    $stmt->bindParam(":classid", $classid);
-    $stmt->bindParam(":student_id", $id);
+    $stmt->bindParam(":class_id", $classid);
     if ($stmt->execute()) {
         $rows = $stmt->fetchAll();
     }
@@ -49,14 +45,22 @@ if($stmt = $pdo->prepare($sql)) {
     <div id="primary-window" class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark overflow-y-scroll">
         <?php include("classTopMenu.php"); ?>
         <div id="primary-window " class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark overflow-y-scroll">
-            <h1 class="my-5">Your Grades.</h1>
+            <h1 class="my-5">Class Files.</h1>
             <?php
             if($role == "teacher"){
                 ?>
                 <div class="flex-grid-wrapper">
-                    <p>
-                        <a href="createAssignment.php?classid=<?= $_SESSION["currentclass"] ?>" class="btn btn-info">Make an assignment.</a>
-                    </p>
+                    <form action="processor/uploadFileProcessor.php" method="post" enctype="multipart/form-data">
+                        <div class="form-row">
+                            <div>
+                                <label for="fileUpload">Upload a file to Submit</label>
+                                <input type="file" name="fileUpload" class="form-control" id="fileUpload">
+                            </div>
+                        </div>
+                        <br>
+                        <button type="submit" class="btn btn-primary">Upload File</button>
+                        <br><br>
+                    </form>
                 </div>
                 <?php
             }
@@ -64,55 +68,53 @@ if($stmt = $pdo->prepare($sql)) {
             <table class="table table-striped table-hover"
             <thead>
             <tr>
-                <th scope="col">Assignment</th>
-                <th scope="col">Max Grade</th>
-                <th scope="col">Grade</th>
-                <th scope="col">Description</th>
-                <th scope="col">Due Date</th>
-                <th scope="col">Availability</th>
-                <th scope="col">Category</th>
+                <th scope="col">File</th>
 
+                <?php
+                if($role == "teacher"){
+                    ?>
+                    <th scope="col">Actions</th>
+                    <?php
+                }
+                ?>
 
             </tr>
             </thead>
             <tbody>
             <?php
             $count = 1;
+            //TODO: Add row potential join in sql to get if there is a submission for this student for this assignment and if so, put a field saying submitted
             foreach($rows as $row)
             {
 //            var_dump($row);
-            if($row["is_active"]){
-                $id = $row["id"];
-                ?>
-                <tr>
-                    <td><?= $row["assignment_name"] ?></td>
-                    <td><?= $row["max_grade"] ?></td>
-                    <td><?= $row["grade"] ?></td>
-                    <td><?= $row["description"] ?></td>
-                    <td><?= $row["due_date"] ?></td>
-                    <td>
-                        <?php
-                        date_default_timezone_set("America/New_York");
-                        if(strtotime(date_default_timezone_get())<strtotime($row["due_date"])){
-                            ?>
-                            Open
+
+                    $id = $row["id"];
+                    $absolutePath = $row['file_path'];
+                    $fileName = basename($row['file_path']);
+                    ?>
+                    <tr>
+                        <td>
+                            <a href="<?=$absolutePath?>" download>
+                                <?= $fileName?>
+                            </a>
+                        </td>
+
                             <?php
-                        }
-                        ?>
-                        <?php
-                        date_default_timezone_set("America/New_York");
-                        if(strtotime(date_default_timezone_get())>strtotime($row["due_date"])){
+                            if($role == "teacher"){
+                                ?>
+                                <td>
+                                <a href="processor/deleteFileProcessor.php?id=<?= $id?>" class="btn btn-danger">Delete</a>
+                                </td>
+                                <?php
+                            }
                             ?>
-                            Closed
-                            <?php
-                        }
-                        ?>
-                    </td>
-                    <td><?= $row["category"] ?></td>
-                </tr>
-                <?php
-                $count++;
-              }
+                            <!--                    <a href="editAssignment.php?id=--><?php //= $id?><!--" class="btn btn-warning">Edit</a>-->
+                            <!--                    <a href="deleteAssignment.php?id=--><?php //= $id?><!--" class="btn btn-danger">Delete</a>-->
+
+                    </tr>
+                    <?php
+                    $count++;
+
             }
             ?>
             </tbody>
