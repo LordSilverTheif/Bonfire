@@ -13,15 +13,7 @@ $currentuserid = $_SESSION["id"];
 $role = $_SESSION["role"];
 
 //Error checker for all pages
-if(isset($_GET["status"]))
-{
-    ?>
-    <script type="text/javascript">
-        let message = <?=$_GET["status"]?>
-        alert(message);
-    </script>
-<?php
-}
+
 
 ?>
 
