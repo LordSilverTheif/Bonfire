@@ -121,9 +121,9 @@ if($stmt3 = $pdo->prepare($sql3)){
         <?php include("classTopMenu.php"); ?>
         <h1 class="my-5">Announcement Information</h1>
 
-        <div class="flex-grid-wrapper">
+        <div class="" style="width:100%">
 
-                <div class="card flex-grid-card bg-dark  bg-gradient" style="width: 95rem;">
+                <div class="card flex-grid-card bg-dark  bg-gradient" style="width: 100%;">
                         <!--                    <img src="resources/images/class_stock_photo.jpg" class="card-img-top" alt="...">-->
                         <div class="card-body">
                             <h5 class="card-title text-light"><?= $body?> </h5>
