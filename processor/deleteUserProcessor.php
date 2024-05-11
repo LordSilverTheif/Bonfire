@@ -16,7 +16,9 @@ if($stmt = $pdo->prepare($sql))
     $stmt->bindParam(":id", $id, PDO::PARAM_INT);
     if($stmt->execute())
     {
-        header("location: ../editUsers.php");
+        header("location: ../editUsers.php?status=User%20Successfully%20Archived!");
+    }else {
+        header("location: ../editUsers.php?status=Error%20Archiving%20Users!");
     }
 }
 ?>

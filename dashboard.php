@@ -51,6 +51,7 @@ else if($role == "teacher") {
     }
 }
 
+
 ?>
 
 <!DOCTYPE html>
@@ -75,34 +76,51 @@ else if($role == "teacher") {
             ?>
             <div class="flex-grid-wrapper">
                 <?php
-                foreach($rows as $row)
-                {
+                foreach($rows as $row) {
+                    $param_id = $row['id'];
+                    $imageString = "classpic/class-$param_id.jpg";
+                    if(file_exists($imageString))
+                    {
+                        $classImage = $imageString;
+                    }
+                    else{
+                        $classImage = "classpic/class_default.jpg";
+                    }
                     ?>
 
                     <div class="card flex-grid-card" style="width: 18rem;">
                         <a href="class.php?classid=<?= $row['id'] ?>">
-                        <img src="resources/images/class_stock_photo.jpg" class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title"><?= $row["class_name"] ?></h5>
-                            <!-- <p class="card-text"> Teacher --><?php //= $row["first_name"] . " " .$row["last_name"]?><!--</p>-->
-                            <p class="card-text"> Term <?= $row["term"]?></p>
-                            <p class="card-text"> Start Date: <?= $row["start_date"]?></p>
-                            <p class="card-text"> End Date: <?= $row["end_date"]?></p>
-                        </div>
+                            <img src="<?= $classImage?>" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title"><?= $row["class_name"] ?></h5>
+                                <!-- <p class="card-text"> Teacher --><?php //= $row["first_name"] . " " .$row["last_name"]?><!--</p>-->
+                                <p class="card-text"> Term <?= $row["term"]?></p>
+                                <p class="card-text"> Start Date: <?= $row["start_date"]?></p>
+                                <p class="card-text"> End Date: <?= $row["end_date"]?></p>
+                            </div>
                         </a>
                     </div>
 
                     <?php
                 }
                 ?>
+
             </div>
             <?php
         }
         ?>
-<!--        <p>-->
-<!--            <a href="reset-password.php" class="btn btn-warning">Reset Your Password</a>-->
-<!--            <a href="logout.php" class="btn btn-danger ml-3">Sign Out of Your Account</a>-->
-<!--        </p>-->
+        <?php
+        if($role == "admin"){
+            ?>
+            <h1>Nothing here for you to see,</h1>
+            <h1>look at the left side menu for your options</h1>
+            <?php
+        }
+        ?>
+        <!--        <p>-->
+        <!--            <a href="reset-password.php" class="btn btn-warning">Reset Your Password</a>-->
+        <!--            <a href="logout.php" class="btn btn-danger ml-3">Sign Out of Your Account</a>-->
+        <!--        </p>-->
     </div>
 
 </main>
