@@ -24,7 +24,9 @@
         $stmt->bindParam(":role", $role, PDO::PARAM_STR);
         if($stmt->execute())
         {
-            header("location: ../editUsers.php");
+            header("location: ../editUsers.php?status=User%20Successfully%20Edited");
+        }else{
+            header("location: ../editUsers.php?status=Failed%20Editing%20Class");
         }
     }
 ?>

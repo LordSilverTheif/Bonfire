@@ -27,7 +27,9 @@ if($stmt = $pdo->prepare($sql)) {
         $stmt->bindParam(":due_date", $ddate, PDO::PARAM_STR);
         $stmt->bindParam(":category", $categ, PDO::PARAM_STR);
         if ($stmt->execute()) {
-            header("location: ./assignments.php?status=success");
+            header("location: ./assignments.php?status=?status=Assignment%20Successfully%20Edited");
+        }else{
+            header("location: ./assignments.php?status=?status=Failed%20Editing%20Assignment");
         }
     }
 }

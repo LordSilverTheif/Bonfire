@@ -18,7 +18,7 @@ if($stmt = $pdo->prepare($sql))
     $stmt->bindParam(":role", $role, PDO::PARAM_STR);
     if($stmt->execute())
     {
-        header("location: ../editUsers.php");
+        header("location: ../editUsers.php?status=Successfully%20added%20User");
     }
 }
 
