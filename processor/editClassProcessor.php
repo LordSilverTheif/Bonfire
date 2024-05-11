@@ -67,10 +67,10 @@ if($stmt = $pdo->prepare($sql))
 //            echo "</ol></li>";
         }
 //        echo "</ol>";
-        header("location: ../editClasses.php?status=success"); //add a parameter here with a success statmenet
+        header("location: ../editClasses.php?status=Class%20Successfully%20Edited"); //add a parameter here with a success statmenet
     }
     else{
-        header("location: ../editClasses.php?status=failure"); //add a parameter here with a failure statmenet
+        header("location: ../editClasses.php?status=Failed%20Editing%20Class"); //add a parameter here with a failure statmenet
     }
 }
 ?>

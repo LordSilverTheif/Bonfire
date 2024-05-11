@@ -38,7 +38,7 @@ try {
                 $studentSql = "Insert into course_grades (class_id, user_id)
                             VALUES(:class_id, :user_id)";
                 if ($studentStmt = $pdo->prepare($studentSql)) {
-                    echo "<li> Statment successfully prepared</li>";
+                    echo "<li> Statement successfully prepared</li>";
                     $studentStmt->bindParam(":class_id", $lastId, PDO::PARAM_INT);
                     $studentStmt->bindParam(":user_id", $student, PDO::PARAM_INT);
                     if ($studentStmt->execute()) {
@@ -48,20 +48,20 @@ try {
                         unset($studentStmt);
                         //TODO: Try to do this with a created statement instead of loop
                     } else {
-                        echo "<li> Statment not executed </li>";
+                        echo "<li> Statement not executed </li>";
                         echo "Problem adding student ($student) to class ($lastId)";
                     }
                 } else {
-                    echo "<li> Statment not prepared</li>";
+                    echo "<li> Statement not prepared</li>";
                 }
                 echo "</ol></li>";
             }
             echo "</ol>";
             if(mkdir("../class_data/${lastId}/assignments", 0777, true)) {
-                header("location: ../editClasses.php?status=success"); //add a parameter here with a success statmenet
+                header("location: ../editClasses.php?status=Added%20Class%20Successfully"); //add a parameter here with a success statmenet
             }
         } else {
-            header("location: ../editClasses.php?status=failure"); //add a parameter here with a failure statmenet
+            header("location: ../editClasses.php?status=Failed%20to%20add%20Class"); //add a parameter here with a failure statmenet
         }
     }
 }

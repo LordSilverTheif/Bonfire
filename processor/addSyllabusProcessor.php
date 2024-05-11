@@ -17,7 +17,7 @@
             $uploadPath = "../class_data/$classid/syllabus.pdf";
             echo "uploading to: $uploadPath";
             move_uploaded_file($_FILES["syllabus"]["tmp_name"], $uploadPath);
-            header("location: ../syllabus.php?status=success&classid=$classid"); //add a parameter here with a success statmenet
+            header("location: ../syllabus.php?status=Successfully%20add%20to&classid=$classid"); //add a parameter here with a success statmenet
         } else {
             print "Error: test file not uploaded";
         }

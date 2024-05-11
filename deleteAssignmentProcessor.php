@@ -13,7 +13,9 @@ if($stmt = $pdo->prepare($sql))
     $stmt->bindParam(":id", $id, PDO::PARAM_INT);
     if($stmt->execute())
     {
-        header("location: assignments.php");
+        header("location: assignments.php?status=Assignment%20Successfully%20Deleted");
+    }else{
+        header("location: assignments.php?status=Assignment%20Failed%20to%20Delete");
     }
 }
 ?>
