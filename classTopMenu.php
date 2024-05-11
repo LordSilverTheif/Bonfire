@@ -9,7 +9,7 @@
             <?php if($role == "student"){ ?> <li  class="nav-item btn btn-outline-secondary""><a href="viewGrades.php?classid=<?= $_SESSION["currentclass"] ?>" class="nav-link">Grades </li></a></li> <?php } ?>
             <li class="nav-item btn btn-outline-secondary""><a href="classRoster.php?classid=<?= $_SESSION["currentclass"] ?>" class="nav-link">People</a></li>
             <li class="nav-item btn btn-outline-secondary""><a href="syllabus.php?classid=<?= $_SESSION["currentclass"] ?> "class="nav-link">Syllabus</a></li>
-            <li class="nav-item btn btn-outline-secondary""><a href="#" class="nav-link">Modules</a></li>
+            <li class="nav-item btn btn-outline-secondary""><a href="#" class="nav-link">Files</a></li>
         </ul>
     </header>
 </div>

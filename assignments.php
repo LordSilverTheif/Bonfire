@@ -77,6 +77,7 @@ if($stmt = $pdo->prepare($sql)) {
         foreach($rows as $row)
         {
 //            var_dump($row);
+            if($row["is_active"]){
             $id = $row["id"];
             ?>
             <tr>
@@ -136,6 +137,7 @@ if($stmt = $pdo->prepare($sql)) {
             </tr>
             <?php
             $count++;
+            }
         }
         ?>
         </tbody>

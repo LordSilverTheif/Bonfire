@@ -102,7 +102,7 @@ if($stmt = $pdo->prepare($sql)) {
                 <br>
                 <input type="hidden" name="aID" value="<?= $aID ?>">
                 <input type="hidden" name="studentId" value="<?= $studentId ?>">
-                <button type="submit" class="btn btn-primary">Submit Assignment (placeholder)</button>
+                <button type="submit" class="btn btn-primary">Submit Assignment</button>
             </form>
             <?php
                 }

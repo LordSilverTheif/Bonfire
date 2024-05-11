@@ -48,11 +48,12 @@ if($stmt = $pdo->prepare($sql)) {
         <?php include("classTopMenu.php"); ?>
         <div id="primary-window " class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark overflow-y-scroll">
             <h1 class="my-5">Submissions</h1>
-            <form action="processor/submitGradesProcessor.php">
+            <form action="processor/submitGradesProcessor.php" method="post">
             <table class="table table-striped table-hover"
             <thead>
             <tr>
                 <th scope="col">#</th>
+                <th scope="col">Sid</th>
                 <th scope="col">Last Name</th>
                 <th scope="col">First Name</th>
                 <th scope="col">File</th>
@@ -66,11 +67,13 @@ if($stmt = $pdo->prepare($sql)) {
             //TODO: Add row potential join in sql to get if there is a submission for this student for this assignment and if so, put a field saying submitted
             foreach($rows as $row)
             {
+                $id=$row["id"];
                 $absolutePath = $row['file_path'];
                 $fileName = basename($row['file_path']);
                 ?>
                 <tr>
                     <td><?=$count?></td>
+                    <td><?= $row["id"] ?></td>
                     <td><?= $row["last_name"] ?></td>
                     <td><?= $row["first_name"] ?></td>
                     <td>
@@ -81,7 +84,7 @@ if($stmt = $pdo->prepare($sql)) {
                     <td><?= $row["grade"]==-1 ? "Not Graded" : "Grade Submitted" ?></td>
                     <td>
 <!--                        TODO Make max pull the max grade from the db-->
-                        <input type="number" min="0" max = "100">
+                        <input type="number" name="<?= $row['id']?>" id="grade" min="0" max = "100" value="<?= $row['grade'] != -1 ? $row['grade'] : ''?>"
                     </td>
                 </tr>
                 <?php
@@ -90,6 +93,7 @@ if($stmt = $pdo->prepare($sql)) {
             ?>
             </tbody>
             </table>
+                <input type="hidden" name="aID" value="<?= $assignmentId ?>">
                 <input type="submit" value="Submit Grades">
             </form>
             <a href = "downloadAllAssignments.php?class=<?=$classid?>&assignment=<?=$assignmentId?>" target="_blank">Download All Assignments</a>

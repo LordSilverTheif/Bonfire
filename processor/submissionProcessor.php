@@ -23,7 +23,7 @@
     $name = basename($_FILES["fileUpload"]["name"]);
     $finalPath= "$studentSubmissionDir/$name";
     if(move_uploaded_file($tmp_name, $finalPath)){
-        $db_file_path ="class_data/$classId/assignments/assignment_$assignmentId/student_$studentId";
+        $db_file_path ="class_data/$classId/assignments/assignment_$assignmentId/student_$studentId/$name";
         echo "file moved\n";
         $sql = "insert into submission(assignment_id, student_id, file_path)
                 values (:assignment_id, :student_id, :file_path)";

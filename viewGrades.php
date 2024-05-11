@@ -14,8 +14,10 @@ $classid = $_SESSION["currentclass"];
 //var_dump($_SESSION);
 
 $pdo = getDBConnection();
-$sql = "SELECT * FROM assignments WHERE class_id = :classid";
-
+$sql = "SELECT * FROM assignments 
+         
+         WHERE class_id = :classid";
+//join above with submissions, also add student id to the where clause
 if($stmt = $pdo->prepare($sql)) {
 // Bind variables to the prepared statement as parameters
 // Attempt to execute the prepared statement
