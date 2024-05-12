@@ -25,11 +25,11 @@ try {
         $stmt->bindParam(":text", $announcement, PDO::PARAM_STR);
         $stmt->bindParam(":date", $date, PDO::PARAM_STR);
         if($stmt->execute()){
-            header("location: ../viewAnnouncement.php?status=success&announcementid=$announcementid ");
+            header("location: ../viewAnnouncement.php?status=Replied%20to%20Announcement&announcementid=$announcementid ");
         }
     }
     else {
-        header("location: ../viewAnnouncement.php?status=failure&announcementid=$announcementid "); //add a parameter here with a failure statmenet
+        header("location: ../viewAnnouncement.php?status=Failed%20to%20Reply%20to%20Announcement&announcementid=$announcementid "); //add a parameter here with a failure statmenet
     }
 }
 catch(PDOException $e) {

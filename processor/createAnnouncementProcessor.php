@@ -23,11 +23,11 @@ try {
         $stmt->bindParam(":title", $titlename, PDO::PARAM_STR);
         $stmt->bindParam(":date", $date, PDO::PARAM_STR);
         if($stmt->execute()){
-            header("location: ../announcements.php?status=success");
+            header("location: ../announcements.php?status=Successfully%20Created%20Announcement");
         }
     }
     else {
-        header("location: ../announcements.php?status=failure"); //add a parameter here with a failure statmenet
+        header("location: ../announcements.php?status=Failed%20to%20Create%20Announcement"); //add a parameter here with a failure statmenet
     }
 }
 catch(PDOException $e) {
