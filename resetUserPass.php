@@ -53,24 +53,14 @@ if($stmt = $pdo->prepare($sql)) {
     <?php include("leftSideMenu.php"); ?>
     <div id="primary-window" class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark ">
         <h1>Change Personal Information:</h1>
-        <form action="processor/editUserProcessor.php" method="post">
-            <label for="fname">First name:</label><br>
-            <input type="text" id="fname" name="fname" value="<?= $fname?>"><br>
-            <label for="lname">Last name:</label><br>
-            <input type="text" id="lname" name="lname" value="<?= $lname?>"><br>
-            <label for="email">Email:</label><br>
-            <input type="text" id="email" name="email" value="<?= $email?>"><br>
-            <br>
-
-            <p>Change Role:</p>
-            <select class="form-select" name="role" aria-label="Default select example">
-                <option value="student" <?php echo ($userRole == "student") ? "selected=selected" : ""?> >Student</option>
-                <option value="teacher" <?php echo ($userRole == "teacher") ? "selected=selected" : ""?> >Teacher</option>
-                <option value="admin" <?php echo ($userRole == "admin") ? "selected=selected" : ""?> >Admin</option>
-            </select>
+        <form action="processor/resetPassProcessor.php" method="post">
+            <label for="pass">Password</label><br>
+            <input type="text" id="pass" name="pass" value=""><br>
             <input type="hidden" name="id" value="<?= $id ?>">
-            <input type="submit" value="Submit">
+
+            <input class ="btn btn-primary" type="submit" value="Submit">
         </form>
+        <button class = "btn btn-info" id="generate" onclick="generate();" style="width:15rem">Generate Password</button>
     </div>
 
 </main>
@@ -80,4 +70,18 @@ if($stmt = $pdo->prepare($sql)) {
 <!-        \___)
 <!-~~~~~~~~~~~~~~~~~-->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script></body>
+<script>
+    function generate(){
+        let field = document.getElementById('pass');
+        let characters = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghiklmnopqrstuvwxyz!$#*?@";
+        let randomPass = '';
+        for(let i = 0;i<12;i++)
+        {
+            let randomIndex = parseInt(Math.random()*characters.length);
+            randomPass+=characters[randomIndex];
+        }
+        console.log(randomPass);
+        field.value = randomPass;
+    }
+</script>
 </html>

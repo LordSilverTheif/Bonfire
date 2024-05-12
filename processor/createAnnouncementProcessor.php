@@ -27,7 +27,7 @@ try {
         }
     }
     else {
-        header("location: ../announcement.php?status=failure"); //add a parameter here with a failure statmenet
+        header("location: ../announcements.php?status=failure"); //add a parameter here with a failure statmenet
     }
 }
 catch(PDOException $e) {
