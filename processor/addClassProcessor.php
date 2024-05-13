@@ -58,6 +58,7 @@ try {
             }
             echo "</ol>";
             if(mkdir("../class_data/${lastId}/assignments", 0777, true)) {
+                mkdir("../class_data/${lastId}/files", 0777, true);
                 header("location: ../editClasses.php?status=Added%20Class%20Successfully"); //add a parameter here with a success statmenet
             }
         } else {
