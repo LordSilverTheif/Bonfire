@@ -48,6 +48,7 @@ if($stmt = $pdo->prepare($sql)) {
         body{ font: 14px sans-serif; text-align: center; }
     </style>
 </head>
+<body>
 <?php include("svgImages.html"); ?>
 <main class="d-flex flex-nowrap">
     <?php include("leftSideMenu.php")?>
@@ -111,6 +112,13 @@ if($stmt = $pdo->prepare($sql)) {
     </div>
 
 </main>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script></body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+<script src="resources/scripts/popups.js">
+    // let params = new URLSearchParams(location.search);
+    // let status = params.get('status');
+    // if(status!==null)
+    //     alert(status);
+</script>
+</body>
 </html>
 

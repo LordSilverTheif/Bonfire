@@ -47,6 +47,7 @@ if($stmt = $pdo->prepare($sql)) {
         body{ font: 14px sans-serif; text-align: center; }
     </style>
 </head>
+<body>
 <?php include("svgImages.html"); ?>
 <main class="d-flex flex-nowrap">
     <?php include("leftSideMenu.php")?>

@@ -16,7 +16,7 @@
             var_dump($_FILES["avatar"]);
             var_dump($_POST);
             move_uploaded_file($_FILES["avatar"]["tmp_name"], "../classpic/class-$classid.jpg");
-            header("location: ../classSettings.php?status=success&classid=$classid"); //add a parameter here with a success statmenet
+            header("location: ../classSettings.php?status=Successfully%20Changed%20Picture%20for%20&classid=$classid"); //add a parameter here with a success statmenet
         } else {
             print "Error: test file not uploaded";
             var_dump($_FILES["avatar"]);
