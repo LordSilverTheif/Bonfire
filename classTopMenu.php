@@ -21,12 +21,12 @@ $role = $_SESSION["role"];
             <?php if($role == "teacher" || $role == "admin"){ ?> <li  class="nav-item btn btn-outline-secondary""><a href="viewStudentGrades.php?classid=<?= $_SESSION["currentclass"] ?>" class="nav-link">Grades </li></a></li> <?php } ?>
             <?php if($role == "student"){ ?> <li  class="nav-item btn btn-outline-secondary""><a href="viewGrades.php?classid=<?= $_SESSION["currentclass"] ?>" class="nav-link">Grades </li></a></li> <?php } ?>
             <li class="nav-item btn btn-outline-secondary""><a href="classRoster.php?classid=<?= $_SESSION["currentclass"] ?>" class="nav-link">People</a></li>
-            <li class="nav-item btn btn-outline-secondary""><a href="syllabus.php?classid=<?= $_SESSION["currentclass"] ?> "class="nav-link">Syllabus</a></li>
+            <li class="nav-item btn btn-outline-secondary""><a href="syllabus.php?classid=<?= $_SESSION["currentclass"] ?> " class="nav-link">Syllabus</a></li>
             <?php
             if($role == "teacher")
             {
                 ?>
-                <li class="nav-item btn btn-outline-secondary""><a href="classSettings.php?classid=<?= $_SESSION["currentclass"] ?>" class="nav-link">settings</a></li>
+                <li class="nav-item btn btn-outline-secondary"><a href="classSettings.php?classid=<?= $_SESSION["currentclass"] ?>" class="nav-link">settings</a></li>
                 <?php
             }
             ?>
