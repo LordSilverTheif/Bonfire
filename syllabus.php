@@ -53,11 +53,19 @@ $syllabusFile = "class_data/$classid/syllabus.pdf";
                 <?php
             }
         ?>
-        <form action="processor/addSyllabusProcessor.php" method="post" enctype="multipart/form-data">
-            <input type="file" name="syllabus" accept="application/pdf">
-            <input type="submit" value="Upload Syllabus">
-            <input type="hidden" name="classid" value="<?=$classid?>">
-        </form>
+
+        <?php
+        if($role == "teacher"){
+            ?>
+            <form action="processor/addSyllabusProcessor.php" method="post" enctype="multipart/form-data">
+                <input type="file" name="syllabus" accept="application/pdf">
+                <input type="submit" value="Upload Syllabus">
+                <input type="hidden" name="classid" value="<?=$classid?>">
+            </form>
+            <?php
+        }
+        ?>
+
     </div>
     <!-- end .container -->
     <!--       _

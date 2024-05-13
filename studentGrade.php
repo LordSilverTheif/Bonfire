@@ -11,19 +11,21 @@ if(!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true){
 $firstName = htmlspecialchars($_SESSION["first_name"]);
 $role = $_SESSION["role"];
 $classid = $_SESSION["currentclass"];
-$id = $_SESSION["id"];
+$stuID = $_GET["id"];
+
 //var_dump($_SESSION);
+//var_dump($_GET);
 
 $pdo = getDBConnection();
 $sql = "SELECT * FROM assignments a
          join submission s on a.id = s.assignment_id
          WHERE class_id = :classid and student_id = :student_id";
-//join above with submissions, also add student id to the where clause
+
 if($stmt = $pdo->prepare($sql)) {
 // Bind variables to the prepared statement as parameters
 // Attempt to execute the prepared statement
     $stmt->bindParam(":classid", $classid);
-    $stmt->bindParam(":student_id", $id);
+    $stmt->bindParam(":student_id", $stuID);
     if ($stmt->execute()) {
         $rows = $stmt->fetchAll();
     }
@@ -49,18 +51,7 @@ if($stmt = $pdo->prepare($sql)) {
     <div id="primary-window" class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark overflow-y-scroll">
         <?php include("classTopMenu.php"); ?>
         <div id="primary-window " class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark overflow-y-scroll">
-            <h1 class="my-5">Your Grades.</h1>
-            <?php
-            if($role == "teacher"){
-                ?>
-                <div class="flex-grid-wrapper">
-                    <p>
-                        <a href="createAssignment.php?classid=<?= $_SESSION["currentclass"] ?>" class="btn btn-info">Make an assignment.</a>
-                    </p>
-                </div>
-                <?php
-            }
-            ?>
+            <h1 class="my-5">This Students Grades.</h1>
             <table class="table table-striped table-hover"
             <thead>
             <tr>
@@ -78,55 +69,45 @@ if($stmt = $pdo->prepare($sql)) {
             <tbody>
             <?php
             $count = 1;
-            $totalMax =  0;
-            $totalGrade = 0;
             foreach($rows as $row)
             {
 //            var_dump($row);
-            if($row["is_active"]){
-                $id = $row["id"];
-                $totalMax+=$row["max_grade"];
-                $totalGrade+=$row["grade"];
-                ?>
-                <tr>
-                    <td><?= $row["assignment_name"] ?></td>
-                    <td><?= $row["max_grade"] ?></td>
-                    <td><?= $row["grade"] ?></td>
-                    <td><?= $row["description"] ?></td>
-                    <td><?= $row["due_date"] ?></td>
-                    <td>
-                        <?php
-                        date_default_timezone_set("America/New_York");
-                        if(strtotime(date_default_timezone_get())<strtotime($row["due_date"])){
-                            ?>
-                            Open
+                if($row["is_active"]){
+                    $id = $row["id"];
+                    ?>
+                    <tr>
+                        <td><?= $row["assignment_name"] ?></td>
+                        <td><?= $row["max_grade"] ?></td>
+                        <td><?= $row["grade"] ?></td>
+                        <td><?= $row["description"] ?></td>
+                        <td><?= $row["due_date"] ?></td>
+                        <td>
                             <?php
-                        }
-                        ?>
-                        <?php
-                        date_default_timezone_set("America/New_York");
-                        if(strtotime(date_default_timezone_get())>strtotime($row["due_date"])){
+                            date_default_timezone_set("America/New_York");
+                            if(strtotime(date_default_timezone_get())<strtotime($row["due_date"])){
+                                ?>
+                                Open
+                                <?php
+                            }
                             ?>
-                            Closed
                             <?php
-                        }
-                        ?>
-                    </td>
-                    <td><?= $row["category"] ?></td>
-                </tr>
-                <?php
-                $count++;
-              } //End If
-            }//End For loop
+                            date_default_timezone_set("America/New_York");
+                            if(strtotime(date_default_timezone_get())>strtotime($row["due_date"])){
+                                ?>
+                                Closed
+                                <?php
+                            }
+                            ?>
+                        </td>
+                        <td><?= $row["category"] ?></td>
+                    </tr>
+                    <?php
+                    $count++;
+                }
+            }
             ?>
             </tbody>
             </table>
-            <?php
-                $average = $totalGrade / $totalMax *100;
-            ?>
-            <p>
-                Current Clas Average: <?= $average ?>%
-            </p>
         </div>
 
 

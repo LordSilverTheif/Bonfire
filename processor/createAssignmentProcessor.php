@@ -1,5 +1,5 @@
 <?php
-require_once "config.php";
+require_once "../config.php";
 session_start();
 $pdo = getDBConnection();
 
@@ -30,12 +30,12 @@ try {
             if(mkdir($newDir, 0777, true))
             {
                 echo "directory created";
-                header("location: ./assignments.php?status=Assignment%20Successfully%20Created");
+                header("location: ../assignments.php?status=Assignment%20Successfully%20Created");
             }
         }
     }
     else {
-        header("location: ./assignments.php?status=Failed%20to%20Create%20Assignment"); //add a parameter here with a failure statmenet
+        header("location: ../assignments.php?status=Failed%20to%20Create%20Assignment"); //add a parameter here with a failure statmenet
     }
 }
 catch(PDOException $e) {

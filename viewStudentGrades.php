@@ -51,7 +51,7 @@ if($stmt = $pdo->prepare($sql)) {
     <div id="primary-window" class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark overflow-y-scroll">
         <?php include("classTopMenu.php"); ?>
     <div id="primary-window" class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark overflow-y-scroll">
-        <h1 class="my-5">Student Grades</h1>
+        <h1 class="my-5">Student Grades.</h1>
         <table class="table table-striped table-hover"
         <thead>
         <tr>
@@ -75,7 +75,7 @@ if($stmt = $pdo->prepare($sql)) {
                 <td><?= $row["email"] ?></td>
                 <td class ='<?= $role?>'><?= $row["role"] ?></td>
                 <td>
-                    <a href="editGrades.php?id=<?= $id?>" class="btn btn-info">View Grades</a>
+                    <a href="studentGrade.php?id=<?= $id?>" class="btn btn-info">View Grades</a>
                 </td>
             </tr>
             <?php
