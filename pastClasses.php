@@ -58,7 +58,7 @@ else if($role == "teacher") {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard</title>
+    <title>Past Classes</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="resources/stylesheets/style.css">
     <style>
@@ -87,24 +87,26 @@ else if($role == "teacher") {
                     else{
                         $classImage = "classpic/class_default.jpg";
                     }
-                    if($row["is_active"]){
+                    if($row["is_active"]) {
+                    }
+                    else{
                         $class_id = $row["id"];
-                    ?>
+                        ?>
 
-                    <div class="card flex-grid-card" style="width: 18rem;">
-                        <a href="class.php?classid=<?= $class_id?>">
-                            <img src="<?= $classImage?>" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title"><?= $row["class_name"] ?></h5>
-                                <!-- <p class="card-text"> Teacher --><?php //= $row["first_name"] . " " .$row["last_name"]?><!--</p>-->
-                                <p class="card-text"> Term <?= $row["term"]?></p>
-                                <p class="card-text"> Start Date: <?= $row["start_date"]?></p>
-                                <p class="card-text"> End Date: <?= $row["end_date"]?></p>
-                            </div>
-                        </a>
-                    </div>
+                        <div class="card flex-grid-card" style="width: 18rem;">
+                            <a href="class.php?classid=<?= $class_id?>">
+                                <img src="<?= $classImage?>" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title"><?= $row["class_name"] ?></h5>
+                                    <!-- <p class="card-text"> Teacher --><?php //= $row["first_name"] . " " .$row["last_name"]?><!--</p>-->
+                                    <p class="card-text"> Term <?= $row["term"]?></p>
+                                    <p class="card-text"> Start Date: <?= $row["start_date"]?></p>
+                                    <p class="card-text"> End Date: <?= $row["end_date"]?></p>
+                                </div>
+                            </a>
+                        </div>
 
-                    <?php
+                        <?php
                     }
                 }
                 ?>
