@@ -125,7 +125,7 @@ if($stmt = $pdo->prepare($sql)) {
                 $average = $totalGrade / $totalMax *100;
             ?>
             <p>
-                Current Clas Average: <?= $average ?>%
+                Current Class Average: <?= $average ?>%
             </p>
         </div>
 
