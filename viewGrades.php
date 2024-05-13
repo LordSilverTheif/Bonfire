@@ -78,11 +78,15 @@ if($stmt = $pdo->prepare($sql)) {
             <tbody>
             <?php
             $count = 1;
+            $totalMax =  0;
+            $totalGrade = 0;
             foreach($rows as $row)
             {
 //            var_dump($row);
             if($row["is_active"]){
                 $id = $row["id"];
+                $totalMax+=$row["max_grade"];
+                $totalGrade+=$row["grade"];
                 ?>
                 <tr>
                     <td><?= $row["assignment_name"] ?></td>
@@ -112,11 +116,17 @@ if($stmt = $pdo->prepare($sql)) {
                 </tr>
                 <?php
                 $count++;
-              }
-            }
+              } //End If
+            }//End For loop
             ?>
             </tbody>
             </table>
+            <?php
+                $average = $totalGrade / $totalMax *100;
+            ?>
+            <p>
+                Current Clas Average: <?= $average ?>%
+            </p>
         </div>
 
 
