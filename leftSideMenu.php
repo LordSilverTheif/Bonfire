@@ -32,13 +32,13 @@ $role = $_SESSION["role"];
             <li class="nav-item">
                 <a href="editClasses.php" class="nav-link text-white left-menu-item" aria-current="page">
                     <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
-                    Add/Modify Classes
+                    Manage Classes
                 </a>
             </li>
             <li class="nav-item">
                 <a href="editUsers.php" class="nav-link text-white left-menu-item" aria-current="page">
                     <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
-                    Add/Modify People
+                    Manage People
                 </a>
             </li>
             <?php
@@ -50,6 +50,24 @@ $role = $_SESSION["role"];
                 Dashboard
             </a>
         </li>
+        <?php
+            if($role == "student" || $role == "teacher" ){
+        ?>
+                <li>
+                    <a href="allClasses.php" class="nav-link text-white left-menu-item">
+                        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
+                        All Classes
+                    </a>
+                </li>
+                <li>
+                    <a href="pastClasses.php" class="nav-link text-white left-menu-item">
+                        <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
+                        Past Classes
+                    </a>
+                </li>
+        <?php
+            }
+        ?>
     </ul>
 
     <hr>

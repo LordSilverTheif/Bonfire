@@ -58,7 +58,7 @@ else if($role == "teacher") {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard</title>
+    <title>Past Classes</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="resources/stylesheets/style.css">
     <style>
@@ -70,7 +70,7 @@ else if($role == "teacher") {
 <main class="d-flex flex-nowrap">
     <?php include("leftSideMenu.php"); ?>
     <div id="primary-window" class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark overflow-y-scroll">
-<!--        <h1 class="my-5">Hi, <b>--><?php //echo $firstName; ?><!--</b>.  Welcome to our site.</h1>-->
+<!--        <h1 class="my-5">Hi, <b>--><?php //echo $firstName; ?><!--</b>. Hi, Welcome to our site.</h1>-->
         <?php
         if($role == "student" || $role == "teacher"){
             ?>
@@ -87,24 +87,26 @@ else if($role == "teacher") {
                     else{
                         $classImage = "classpic/class_default.jpg";
                     }
-                    if($row["is_active"]){
+                    if($row["is_active"]) {
+                    }
+                    else{
                         $class_id = $row["id"];
-                    ?>
+                        ?>
 
-                    <div class="card flex-grid-card" style="width: 18rem;">
-                        <a href="class.php?classid=<?= $class_id?>">
-                            <img src="<?= $classImage?>" class="card-img-top" alt="...">
-                            <div class="card-body">
-                                <h5 class="card-title"><?= $row["class_name"] ?></h5>
-                                <!-- <p class="card-text"> Teacher --><?php //= $row["first_name"] . " " .$row["last_name"]?><!--</p>-->
-                                <p class="card-text"> Term <?= $row["term"]?></p>
-                                <p class="card-text"> Start Date: <?= $row["start_date"]?></p>
-                                <p class="card-text"> End Date: <?= $row["end_date"]?></p>
-                            </div>
-                        </a>
-                    </div>
+                        <div class="card flex-grid-card" style="width: 18rem;">
+                            <a href="class.php?classid=<?= $class_id?>">
+                                <img src="<?= $classImage?>" class="card-img-top" alt="...">
+                                <div class="card-body">
+                                    <h5 class="card-title"><?= $row["class_name"] ?></h5>
+                                    <!-- <p class="card-text"> Teacher --><?php //= $row["first_name"] . " " .$row["last_name"]?><!--</p>-->
+                                    <p class="card-text"> Term <?= $row["term"]?></p>
+                                    <p class="card-text"> Start Date: <?= $row["start_date"]?></p>
+                                    <p class="card-text"> End Date: <?= $row["end_date"]?></p>
+                                </div>
+                            </a>
+                        </div>
 
-                    <?php
+                        <?php
                     }
                 }
                 ?>

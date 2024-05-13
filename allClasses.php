@@ -15,7 +15,7 @@ $pdo = getDBConnection();
 
 if($role == "student") {
     $sql = "SELECT c.id, c.class_name, c.start_date, c.end_date,
-        c.term, c.is_active
+        c.term
         FROM classes c
         join course_grades cg on cg.class_id =c.id
         join users u on u.id =cg.user_id
@@ -34,7 +34,7 @@ if($role == "student") {
 }
 else if($role == "teacher") {
     $sql = "SELECT c.id, c.class_name, c.start_date, c.end_date,
-        c.term, c.is_active
+        c.term
         FROM    classes c
         where c.teacher_id = :id;
  ";
@@ -58,7 +58,7 @@ else if($role == "teacher") {
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Dashboard</title>
+    <title>All Classes</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="resources/stylesheets/style.css">
     <style>
@@ -70,12 +70,11 @@ else if($role == "teacher") {
 <main class="d-flex flex-nowrap">
     <?php include("leftSideMenu.php"); ?>
     <div id="primary-window" class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark overflow-y-scroll">
-<!--        <h1 class="my-5">Hi, <b>--><?php //echo $firstName; ?><!--</b>.  Welcome to our site.</h1>-->
+<!--        <h1 class="my-5">Hi, <b>--><?php //echo $firstName; ?><!--</b>.</h1>-->
         <?php
         if($role == "student" || $role == "teacher"){
             ?>
             <div class="flex-grid-wrapper">
-
                 <?php
                 foreach($rows as $row) {
                     $param_id = $row['id'];
@@ -87,12 +86,10 @@ else if($role == "teacher") {
                     else{
                         $classImage = "classpic/class_default.jpg";
                     }
-                    if($row["is_active"]){
-                        $class_id = $row["id"];
                     ?>
 
                     <div class="card flex-grid-card" style="width: 18rem;">
-                        <a href="class.php?classid=<?= $class_id?>">
+                        <a href="class.php?classid=<?= $row['id'] ?>">
                             <img src="<?= $classImage?>" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title"><?= $row["class_name"] ?></h5>
@@ -105,7 +102,6 @@ else if($role == "teacher") {
                     </div>
 
                     <?php
-                    }
                 }
                 ?>
 
