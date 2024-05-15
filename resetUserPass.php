@@ -60,7 +60,7 @@ if($stmt = $pdo->prepare($sql)) {
 
             <input class ="btn btn-primary" type="submit" value="Submit">
         </form>
-        <button class = "btn btn-info" id="generate" onclick="generate();" style="width:15rem">Generate Password</button>
+        <button class = "btn btn-info" id="generate" onclick="generate();" style="width:15rem;margin-left:auto;margin-right:auto">Generate Password</button>
     </div>
 
 </main>
