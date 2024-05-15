@@ -16,7 +16,20 @@ $classid = $_SESSION["currentclass"];
 $pdo = getDBConnection();
 $syllabusFile = "class_data/$classid/syllabus.pdf";
 
-
+$sql2 = "Select * from classes where id = :id";
+if($stmt2=$pdo->prepare($sql2))
+{
+    $stmt2->bindParam(":id", $param_id, PDO::PARAM_INT);
+    $param_id  = $_GET["classid"];
+    if($stmt2->execute())
+    {
+        if($stmt2->rowCount() == 1) {
+            if ($row2 = $stmt2->fetch()) {
+                $className = $row2["class_name"];
+            }
+        }
+    }
+}
 //var_dump($_SESSION);
 //var_dump($stmt);
 ?>
@@ -25,7 +38,7 @@ $syllabusFile = "class_data/$classid/syllabus.pdf";
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Manage Users</title>
+    <title><?= $className ?> Syllabus</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="resources/stylesheets/table.css">
     <link rel="stylesheet" href="resources/stylesheets/style.css">
@@ -39,7 +52,7 @@ $syllabusFile = "class_data/$classid/syllabus.pdf";
     <?php include("leftSideMenu.php")?>
     <div id="primary-window" class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark overflow-y-scroll">
         <?php include("classTopMenu.php"); ?>
-    <div id="primary-window" class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark overflow-y-scroll">
+
         <?php
             if(file_exists($syllabusFile))
             {
