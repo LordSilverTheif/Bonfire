@@ -52,7 +52,7 @@ if($stmt2=$pdo->prepare($sql2))
     <?php include("leftSideMenu.php")?>
     <div id="primary-window" class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark overflow-y-scroll">
         <?php include("classTopMenu.php"); ?>
-    <div id="primary-window" class="d-flex flex-column flex-shrink-0 p-3 text-bg-dark overflow-y-scroll">
+
         <?php
             if(file_exists($syllabusFile))
             {
