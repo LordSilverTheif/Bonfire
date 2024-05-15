@@ -55,13 +55,21 @@ if($stmt = $pdo->prepare($sql)) {
         <h1 class="my-5">Manage Classes</h1>
         <div class="flex-grid-wrapper">
             <?php
-            foreach($rows as $row)
-            {
+            foreach($rows as $row) {
+                $param_id = $row['id'];
+                $imageString = "classpic/class-$param_id.jpg";
+                if(file_exists($imageString))
+                {
+                    $classImage = $imageString;
+                }
+                else{
+                    $classImage = "classpic/class_default.jpg";
+                }
                 if($row["is_active"]){
                 $class_id = $row["id"];
                 ?>
                 <div class="card flex-grid-card" style="width: 18rem;">
-                    <img src="resources/images/class_stock_photo.jpg" class="card-img-top" alt="...">
+                    <img src="<?= $classImage?>" class="card-img-top" alt="...">
                     <div class="card-body">
                         <h5 class="card-title"><?= $row["class_name"] ?></h5>
                         <p class="card-text"> Teacher <?= $row["first_name"] . " " .$row["last_name"]?></p>
