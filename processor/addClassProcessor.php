@@ -5,6 +5,7 @@ $pdo = getDBConnection();
 $id = $_POST["id"];
 $cname =$_POST["cname"];
 $teacherID=$_POST["teacher"];
+$teachers = $_POST["teachers"];
 $sdate =$_POST["sdate"];
 $edate= $_POST["edate"];
 $term =$_POST["term"];
@@ -31,7 +32,30 @@ try {
             #Class should be created
             $lastId = $pdo->lastInsertId();
             //echo $lastId;
-
+            foreach ($teachers as $teacher){
+                echo "<li><ol>";
+                echo "<li> Working on teacher $teacher</li>";
+                $teacherSql = "INSERT into teachers (class_id, teacher_id)
+                                VALUES(:class_id, :teacher_id)";
+                if ($teacherStmt = $pdo->prepare($teacherSql)) {
+                    echo "<li> Statement successfully prepared</li>";
+                    $teacherStmt->bindParam(":class_id", $lastId, PDO::PARAM_INT);
+                    $teacherStmt->bindParam(":user_id", $teacher, PDO::PARAM_INT);
+                    if ($teacherStmt->execute()) {
+                        echo "<li> Statment successfully executed</li>";
+                        echo "$teacherStmt added to class with id $lastId";
+                        unset($teacherSql);
+                        unset($teacherStmt);
+                        //TODO: Try to do this with a created statement instead of loop
+                    } else {
+                        echo "<li> Statement not executed </li>";
+                        echo "Problem adding teacher ($teacher) to class ($lastId)";
+                    }
+                } else {
+                    echo "<li> Statement not prepared</li>";
+                }
+                echo "</ol></li>";
+            }
             foreach ($students as $student) {
                 echo "<li><ol>";
                 echo "<li> Working on student $student</li>";

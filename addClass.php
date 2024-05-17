@@ -109,23 +109,53 @@ if($stmt3 = $pdo->prepare($sql3)) {
                 <option value="Fall">Fall</option>
                 <!-- TODO: Fix this to use a database table with population in php -->
             </select>
-            <br>
+            <br><br>
+            <input type="submit" value="Submit"> <br><br>
             <label for="teacher">Teachers</label><br>
-            <select name="teacher" id="teacher">
+            <table class="table table-striped table-hover">
+                <thead>
+                <tr>
+                    <th scope="col">id#</th>
+                    <th scope="col">First</th>
+                    <th scope="col">Last</th>
+                    <th scope="col">Add to</th>
+                </tr>
+                </thead>
+                <tbody>
                 <?php
-                foreach($teacherRows as $teacher )
-                {
+                $teachcount = 1;
+                foreach($teacherRows as $teacher ) {
                     $teacherFirst = $teacher['first_name'];
                     $teacherLast = $teacher['last_name'];
                     $teacherId = $teacher['id'];
                     ?>
-                    <option <?php echo ($teacherId == $currentTeacherId) ? "selected=selected" : ""?> value="<?= $teacherId?>"><?= $teacherLast.", ".$teacherFirst?></option>
+                    <tr>
+                        <th scope="row"><?= $teacherId?></th>
+                        <td><?= $teacherFirst ?></td>
+                        <td><?= $teacherLast ?></td>
+                        <td><input name = "teachers[]" value = "<?= $teacherId?>" type ="checkbox"></td>
+                    </tr>
                     <?php
+                    $teachcount++;
                 }
                 ?>
-            </select>
+                </tbody>
+            </table>
+            <!--            <select name="teacher" id="teacher">-->
+            <!--                --><?php
+            //                foreach($teacherRows as $teacher )
+            //                {
+            //                    $teacherFirst = $teacher['first_name'];
+            //                    $teacherLast = $teacher['last_name'];
+            //                    $teacherId = $teacher['id'];
+            //                    ?>
+            <!--                    <option --><?php //echo ($teacherId == $currentTeacherId) ? "selected=selected" : ""?><!-- value="--><?php //= $teacherId?><!--">--><?php //= $teacherLast.", ".$teacherFirst?><!--</option>-->
+            <!--                    --><?php
+            //                }
+            //                ?>
+            <!--            </select>-->
             <input type="hidden" name="id" value="<?= $class_id ?>">
-            <input type="submit" value="Submit">
+
             <table class="table table-striped table-hover">
                 <thead>
                 <tr>
